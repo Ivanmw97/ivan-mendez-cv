@@ -7,8 +7,8 @@ interface Props {
 }
 
 const { 
-  title = 'Developer CV', 
-  description = 'Professional CV showcasing development experience, skills, and projects'
+  title = 'Iván Méndez – Software Developer', 
+  description = 'Portfolio of Iván Méndez, a software developer specializing in mobile and web development using Kotlin, Flutter, Java, Vue, and more.'
 } = Astro.props;
 ---
 
@@ -17,10 +17,29 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content={description} />
+
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content="Iván Méndez" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+
+    <!-- SEO / Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content="https://ivanmendez.dev" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-preview.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-preview.png" />
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="bg-gray-50 font-sans antialiased">

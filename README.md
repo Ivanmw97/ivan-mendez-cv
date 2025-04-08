@@ -1,48 +1,29 @@
-# Astro Starter Kit: Basics
+# 💼 Iván Méndez – Portfolio
 
-```sh
-npm create astro@latest -- --template basics
-```
+Welcome to my personal portfolio website!  
+I'm a software developer with 5+ years of experience in mobile and web development, passionate about crafting robust, scalable, and user-centered digital solutions.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## 🔍 About Me
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I specialize in both native and cross-platform mobile development using **Kotlin**, **Swift**, and **Flutter**, and have experience building modern web applications with **Java**, **Vue.js**, and **React**. I’ve worked on enterprise-level projects for major German clients and collaborated across multidisciplinary teams using **Agile/Scrum** methodologies.
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+## 🛠️ Technologies & Tools
 
-## 🚀 Project Structure
+- **Mobile:** Kotlin, Swift, Flutter (Dart)
+- **Web:** Java, Vaadin, Vue.js, React, TypeScript
+- **Backend:** Node.js, Java, RESTful APIs, GraphQL
+- **Databases:** Oracle, MSSQL
+- **Tools & Practices:** Git, Jenkins, Docker, Agile, CI/CD
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🌐 Live Preview
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+[🔗 Visit my portfolio](test)
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 📫 Contact
 
-## 🧞 Commands
+Feel free to reach out!
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- 📧 Email: ivanmw97@gmail.com  
+- 📍 Location: Santa Cruz de Tenerife, Spain  
+- 💼 [LinkedIn](https://www.linkedin.com/in/ivanmw97/)  
+- 💻 [GitHub](https://github.com/Ivanmw97)  

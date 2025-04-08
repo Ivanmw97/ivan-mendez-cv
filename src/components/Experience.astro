@@ -1,0 +1,44 @@
+---
+interface Experience {
+  company: string;
+  position: string;
+  period: string;
+  location: string;
+  achievements: string[];
+}
+
+interface Props {
+  experiences: Experience[];
+}
+
+const { experiences } = Astro.props;
+---
+
+<section class="py-12 bg-gray-50">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">Professional Experience</h2>
+    
+    <div class="space-y-8">
+      {experiences.map((experience) => (
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <div class="flex flex-wrap justify-between items-start mb-4">
+            <div>
+              <h3 class="text-xl font-semibold text-gray-800">{experience.position}</h3>
+              <p class="text-lg text-blue-600">{experience.company}</p>
+            </div>
+            <div class="text-right">
+              <p class="text-gray-600">{experience.period}</p>
+              <p class="text-gray-500">{experience.location}</p>
+            </div>
+          </div>
+          
+          <ul class="list-disc list-inside space-y-2 text-gray-700">
+            {experience.achievements.map((achievement) => (
+              <li class="leading-relaxed">{achievement}</li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

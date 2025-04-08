@@ -12,11 +12,14 @@ interface Props {
 }
 
 const { experiences } = Astro.props;
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
 ---
 
 <section class="py-12 bg-gray-50">
   <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800">Professional Experience</h2>
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">
+      {lang === 'es' ? 'Experiencia Profesional' : 'Professional Experience'}
+    </h2>
     
     <div class="space-y-8">
       {experiences.map((experience) => (

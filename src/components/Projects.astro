@@ -12,11 +12,14 @@ interface Props {
 }
 
 const { projects } = Astro.props;
+const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
 ---
 
 <section class="py-12 bg-white">
   <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800">Featured Projects</h2>
+    <h2 class="text-3xl font-bold mb-8 text-gray-800">
+      {lang === 'es' ? 'Proyectos Destacados' : 'Featured Projects'}
+    </h2>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       {projects.map((project) => (

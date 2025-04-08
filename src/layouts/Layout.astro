@@ -45,6 +45,9 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   </head>
   <body class="bg-gray-50 font-sans antialiased">
+    <div class="fixed top-4 right-4 z-50">
+      <slot name="language-selector" />
+    </div>
     <main class="min-h-screen">
       <slot />
     </main>

@@ -1,4 +1,6 @@
 ---
+import LanguageSelector from './LanguageSelector.astro';
+
 interface Props {
   name: string;
   title: string;
@@ -14,8 +16,12 @@ const { name, title, summary, email, location, linkedin, github } = Astro.props;
 
 <header class="text-gray-800 py-12 bg-gradient-to-r from-blue-50 to-indigo-50">
   <div class="container mx-auto px-4">
-    <h1 class="text-4xl font-bold mb-2">{name}</h1>
-    <h2 class="text-2xl text-blue-600 font-semibold mb-4">{title}</h2>
+    <div class="flex justify-between items-start mb-6">
+      <div>
+        <h1 class="text-4xl font-bold mb-2">{name}</h1>
+        <h2 class="text-2xl text-blue-600 font-semibold">{title}</h2>
+      </div>
+    </div>    
     
     <div class="flex flex-wrap gap-4 mb-6 text-sm">
       <div class="flex items-center">
@@ -52,3 +58,9 @@ const { name, title, summary, email, location, linkedin, github } = Astro.props;
     <p class="text-lg leading-relaxed max-w-3xl">{summary}</p>
   </div>
 </header>
+
+<style>
+  .lang-selector-container {
+    margin-top: 0.5rem;
+  }
+</style>

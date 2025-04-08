@@ -6,24 +6,59 @@
   --hover-bg: #f0f0f0;
   --active-bg: #333333;
   --active-text: #ffffff;
+  --card-bg: #f9fafb;
+  --card-border: rgba(0, 0, 0, 0.1);
+  --header-bg-from: #ebf4ff;
+  --header-bg-to: #eef2ff;
+  --shadow-color: rgba(0, 0, 0, 0.1);
 }
 
 :root.dark {
-  --bg-color: #1a1a1a;
-  --text-color: #ffffff;
+  --bg-color: #121212;
+  --text-color: #f0f0f0;
   --hover-bg: #2a2a2a;
   --active-bg: #ffffff;
   --active-text: #333333;
+  --card-bg: #1e1e1e;
+  --card-border: rgba(255, 255, 255, 0.1);
+  --header-bg-from: #1a1a2e;
+  --header-bg-to: #16213e;
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Add smooth transitions for theme changes */
-body {
-  transition: background-color 0.3s ease, color 0.3s ease;
+/* Dark mode overrides */
+.dark .bg-white {
+  background-color: var(--bg-color);
+}
+
+.dark .bg-gray-50 {
+  background-color: var(--card-bg);
+}
+
+.dark .text-gray-800 {
+  color: var(--text-color);
+}
+
+.dark .text-gray-700 {
+  color: #d1d5db;
+}
+
+.dark .border-gray-200 {
+  border-color: var(--card-border);
+}
+
+.dark .shadow-sm {
+  box-shadow: 0 1px 2px var(--shadow-color);
+}
+
+.dark header.bg-gradient-to-r {
+  background: linear-gradient(to right, var(--header-bg-from), var(--header-bg-to));
 }
 
 /* Support for language-specific text */

@@ -5,18 +5,16 @@ import Skills from '../../components/Skills.astro';
 import Experience from '../../components/Experience.astro';
 import Projects from '../../components/Projects.astro';
 import LanguageSelector from '../../components/LanguageSelector.astro';
+import ThemeToggle from '../../components/ThemeToggle.astro';
 import { useTranslations } from '../../i18n/utils';
 
 const t = useTranslations('en');
 ---
 
 <Layout title={`${t.personalInfo.name} - ${t.personalInfo.title}`}>
-  <Fragment slot="language-selector">
-    <LanguageSelector currentLang="en" />
-  </Fragment>
-  <Header {...t.personalInfo}>
+    <ThemeToggle slot="theme-toggle" />
     <LanguageSelector slot="language-selector" currentLang="en" />
-  </Header>
+  <Header {...t.personalInfo}></Header>
   <Skills skills={t.skills} />
   <Experience experiences={t.experiences} />
   <Projects projects={t.projects} />

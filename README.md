@@ -17,7 +17,7 @@ I specialize in both native and cross-platform mobile development using **Kotlin
 
 ## 🌐 Live Preview
 
-[🔗 Visit my portfolio](test)
+[🔗 Visit my portfolio](https://ivanmendez.dev/)
 
 ## 📫 Contact
 

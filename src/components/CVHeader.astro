@@ -1,0 +1,112 @@
+---
+interface Props {
+  name: string;
+  title: string;
+  summary: string;
+}
+
+const { name, title, summary } = Astro.props;
+---
+
+<section class="cv-header">
+  <div class="cv-header-container">
+    <div class="cv-header-content">
+      <h1 class="cv-name">{name}</h1>
+      <p class="cv-title">{title}</p>
+      <p class="cv-summary">{summary}</p>
+
+      <a href="#" class="download-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+          <polyline points="7 10 12 15 17 10"></polyline>
+          <line x1="12" y1="15" x2="12" y2="3"></line>
+        </svg>
+        Download CV - Not working yet
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cv-header {
+    padding: 4rem 2rem;
+    background-color: var(--color-white);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .cv-header-container {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+  }
+
+  .cv-header-content {
+    max-width: 48rem;
+  }
+
+  .cv-name {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    margin-bottom: 0.5rem;
+  }
+
+  .cv-title {
+    font-size: 1.25rem;
+    color: var(--color-gray-600);
+    margin-bottom: 1.5rem;
+  }
+
+  .cv-summary {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-gray-700);
+    margin-bottom: 2rem;
+  }
+
+  .download-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: var(--color-black);
+    border-radius: 0.5rem;
+    transition: all var(--transition-base);
+  }
+
+  .download-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+  }
+
+  @media (max-width: 768px) {
+    .cv-header {
+      padding: 3rem 1.5rem;
+    }
+
+    .cv-name {
+      font-size: 2.25rem;
+    }
+
+    .cv-title {
+      font-size: 1.125rem;
+    }
+
+    .cv-summary {
+      font-size: 0.9375rem;
+    }
+  }
+</style>

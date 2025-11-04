@@ -1,0 +1,187 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+
+<Layout
+  title="Contact - Ivan Westlund"
+  description="Get in touch with Ivan Westlund for software development opportunities and collaborations."
+>
+  <Header />
+
+  <main class="contact-page">
+    <div class="contact-container">
+      <header class="contact-header">
+        <h1 class="contact-title">Get in Touch</h1>
+        <p class="contact-subtitle">
+          Feel free to reach out for collaborations or just a friendly<br
+          />hello! Fill out the form below and I'll get back to you as<br />soon
+          as possible.
+        </p>
+      </header>
+
+      <form
+        action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID"
+        method="POST"
+        class="contact-form"
+      >
+        <div class="form-group">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="form-input"
+            placeholder="Enter your name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="form-input"
+            placeholder="Enter your email address"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="message" class="form-label">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            rows="6"
+            required
+            class="form-input"
+            placeholder="Your message here..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-button"> Send Message </button>
+      </form>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .contact-page {
+    min-height: calc(100vh - 4.5rem);
+    padding: 4rem 2rem;
+    background-color: var(--color-white);
+  }
+
+  .contact-container {
+    max-width: 42rem;
+    margin: 0 auto;
+  }
+
+  .contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .contact-title {
+    font-size: 3rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-subtitle {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--color-gray-600);
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .form-label {
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    font-size: 1rem;
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-300);
+    border-radius: 0.5rem;
+    transition: border-color var(--transition-fast);
+    font-family: var(--font-sans);
+  }
+
+  .form-input::placeholder {
+    color: var(--color-gray-400);
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--color-black);
+  }
+
+  textarea.form-input {
+    resize: vertical;
+    min-height: 150px;
+  }
+
+  .submit-button {
+    width: 100%;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: var(--color-black);
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    margin-top: 0.5rem;
+  }
+
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .submit-button:active {
+    transform: translateY(0);
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .contact-page {
+      padding: 3rem 1.5rem;
+    }
+
+    .contact-title {
+      font-size: 2.25rem;
+    }
+
+    .contact-subtitle {
+      font-size: 1rem;
+    }
+
+    .contact-subtitle br {
+      display: none;
+    }
+  }
+</style>

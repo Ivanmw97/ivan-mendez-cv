@@ -9,24 +9,21 @@ interface Props {
 }
 
 const { skills } = Astro.props;
-const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
 ---
 
-<section class="py-12 bg-white">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-8 text-gray-800">
-      {lang === 'es' ? 'Habilidades Técnicas' : 'Technical Skills'}
+<section class="skills-section">
+  <div class="skills-container">
+    <h2 class="section-title">
+      Skills
     </h2>
     
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="skills-grid">
       {skills.map((skillGroup) => (
-        <div class="bg-gray-50 rounded-lg p-6 shadow-sm">
-          <h3 class="text-xl font-semibold mb-4 text-blue-600">{skillGroup.category}</h3>
-          <div class="flex flex-wrap gap-2">
+        <div class="skill-group">
+          <h3 class="skill-category">{skillGroup.category}</h3>
+          <div class="skill-tags">
             {skillGroup.items.map((skill) => (
-              <span class="bg-white px-3 py-1 rounded-full text-sm font-medium text-gray-700 border border-gray-200">
-                {skill}
-              </span>
+              <span class="skill-tag">{skill}</span>
             ))}
           </div>
         </div>
@@ -34,3 +31,73 @@ const lang = Astro.url.pathname.startsWith('/es') ? 'es' : 'en';
     </div>
   </div>
 </section>
+
+<style>
+  .skills-section {
+    padding: 4rem 2rem;
+    background-color: var(--color-gray-50);
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+
+  .skills-container {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    margin-bottom: 2.5rem;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-category {
+    font-size: 1.125rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-black);
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-tag {
+    display: inline-block;
+    padding: 0.375rem 0.875rem;
+    font-size: 0.875rem;
+    font-weight: var(--font-weight-normal);
+    color: var(--color-gray-700);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.375rem;
+  }
+
+  @media (max-width: 768px) {
+    .skills-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .skills-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+</style>

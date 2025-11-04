@@ -1,6 +1,28 @@
 export default {
+  nav: {
+    home: 'Home',
+    cv: 'CV',
+    blog: 'Blog',
+    contact: 'Contact'
+  },
+  landing: {
+    title: "Hi, I'm Iván",
+    subtitle: 'Software Developer (Mobile & Web)',
+    viewCv: 'View CV',
+    readBlog: 'Read Blog',
+    contactMe: 'Contact',
+    alsoInSpanish: 'Also in Spanish'
+  },
+  contact: {
+    title: 'Contact',
+    name: 'Your Name',
+    email: 'Your Email',
+    message: 'Your Message',
+    send: 'Send Message',
+    success: 'Thanks! Your message has been sent.'
+  },
   personalInfo: {
-    name: "Ivan Mendez",
+    name: "Ivan Westlund",
     title: "Software Developer",
     summary: "Versatile software developer with 5+ years of experience in mobile and web development. Skilled in building native and cross-platform mobile apps using Kotlin, Swift, and Flutter, as well as web applications with Java, Vue.js, and React. Experienced working in Agile teams, delivering scalable solutions with clean, maintainable code and strong adherence to best practices. Passionate about technology, continuous learning, and delivering high-quality user experiences.",
     email: "ivanmw97@gmail.com",

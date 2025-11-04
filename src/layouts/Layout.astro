@@ -1,14 +1,14 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 interface Props {
   title?: string;
   description?: string;
 }
 
-const { 
-  title = 'Iván Méndez – Software Developer', 
-  description = 'Portfolio of Iván Méndez, a software developer specializing in mobile and web development using Kotlin, Flutter, Java, Vue, and more.'
+const {
+  title = "Iván Westlund – Software Developer",
+  description = "Software developer and digital creator crafting elegant and efficient solutions.",
 } = Astro.props;
 ---
 
@@ -16,7 +16,7 @@ const {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -24,8 +24,7 @@ const {
     <meta name="author" content="Iván Méndez" />
 
     <!-- Favicon -->
-    <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="any" />
 
     <!-- SEO / Open Graph -->
     <meta property="og:title" content={title} />
@@ -40,25 +39,12 @@ const {
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="https://ivanmendez.dev/og-preview.png" />
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta
+      name="twitter:image"
+      content="https://ivanmendez.dev/og-preview.png"
+    />
   </head>
-  <body class="bg-gray-50 font-sans antialiased">
-    <div class="fixed top-4 right-4 z-50 flex gap-2">
-      <slot name="theme-toggle" />
-      <slot name="language-selector" />
-    </div>
-    <main class="min-h-screen">
-      <slot />
-    </main>
+  <body>
+    <slot />
   </body>
 </html>
-
-<style>
-  :root {
-    --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont,
-      'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  }
-</style>

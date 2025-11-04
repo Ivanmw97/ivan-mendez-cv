@@ -1,29 +1,30 @@
-# 💼 Iván Méndez – Portfolio
+# 💼 Ivan Westlund – Developer Portfolio
 
-Welcome to my personal portfolio website!  
-I'm a software developer with 5+ years of experience in mobile and web development, passionate about crafting robust, scalable, and user-centered digital solutions.
+Welcome to my personal portfolio website — a clean and minimal showcase of my work, experience, and digital craftsmanship.  
+I’m a **software developer** focused on building high-quality mobile and web applications that combine performance, usability, and elegant design.
 
-## 🔍 About Me
+## 👤 About Me
 
-I specialize in both native and cross-platform mobile development using **Kotlin**, **Swift**, and **Flutter**, and have experience building modern web applications with **Java**, **Vue.js**, and **React**. I’ve worked on enterprise-level projects for major German clients and collaborated across multidisciplinary teams using **Agile/Scrum** methodologies.
+With 5+ years of experience, I specialize in **native and cross-platform mobile development** using **Kotlin**, **Swift**, and **Flutter**, as well as **modern web technologies** like **Vue.js**, **React**, and **TypeScript**.  
+I’ve contributed to large-scale enterprise projects and worked within multidisciplinary teams under **Agile/Scrum** methodologies.
 
-## 🛠️ Technologies & Tools
+## 🧠 Tech Stack
 
-- **Mobile:** Kotlin, Swift, Flutter (Dart)
-- **Web:** Java, Vaadin, Vue.js, React, TypeScript
-- **Backend:** Node.js, Java, RESTful APIs, GraphQL
-- **Databases:** Oracle, MSSQL
-- **Tools & Practices:** Git, Jenkins, Docker, Agile, CI/CD
+- **Mobile:** Kotlin, Swift, Flutter (Dart)  
+- **Web:** Vue.js, React, TypeScript, Java (Vaadin)  
+- **Backend:** Node.js, Java, RESTful APIs, GraphQL  
+- **Databases:** Oracle, MSSQL  
+- **Tools & Workflow:** Git, Docker, Jenkins, CI/CD, Agile  
 
-## 🌐 Live Preview
+## 🌐 Live Website
 
-[🔗 Visit my portfolio](https://ivanmendez.dev/)
+➡️ [Visit ivanmendez.dev](https://ivanmendez.dev)
 
-## 📫 Contact
+## 📬 Get in Touch
 
-Feel free to reach out!
-
-- 📧 Email: ivanmw97@gmail.com  
-- 📍 Location: Santa Cruz de Tenerife, Spain  
+- 📧 **ivanmw97@gmail.com**  
+- 📍 Santa Cruz de Tenerife, Spain  
 - 💼 [LinkedIn](https://www.linkedin.com/in/ivanmw97/)  
-- 💻 [GitHub](https://github.com/Ivanmw97)  
+- 💻 [GitHub](https://github.com/Ivanmw97)
+
+---

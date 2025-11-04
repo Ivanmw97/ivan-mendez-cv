@@ -1,6 +1,129 @@
 ---
-export const prerender = false;
-
-const defaultLang = 'en';
-return Astro.redirect(`/${defaultLang}`);
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
+
+<Layout title="Ivan Westlund – Software Developer">
+  <Header />
+
+  <main class="hero">
+    <div class="hero-container">
+      <h1 class="hero-title">
+        Building digital experiences<br />with precision and purpose.
+      </h1>
+
+      <p class="hero-subtitle">
+        A software developer and digital creator crafting elegant and<br
+        />efficient solutions.
+      </p>
+
+      <a href="/cv" class="cta-button"> View My CV </a>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .hero {
+    min-height: calc(100vh - 4.5rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background-color: var(--color-gray-50);
+  }
+
+  .hero-container {
+    max-width: 56rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .hero-title {
+    font-size: 3.75rem;
+    font-weight: var(--font-weight-black);
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.6;
+    color: var(--color-gray-600);
+    max-width: 42rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-white);
+    background-color: var(--color-black);
+    border-radius: 2rem;
+    transition: all var(--transition-base);
+    margin-top: 1rem;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    opacity: 1;
+  }
+
+  /* Tablet */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 3rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+    }
+  }
+
+  /* Mobile */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: calc(100vh - 4rem);
+      padding: 3rem 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 2.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+    }
+
+    .hero-subtitle br {
+      display: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 1.875rem;
+    }
+
+    .hero-title br {
+      display: none;
+    }
+
+    .cta-button {
+      padding: 0.75rem 1.75rem;
+      font-size: 0.9375rem;
+    }
+  }
+</style>

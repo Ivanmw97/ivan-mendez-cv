@@ -1,4 +1,4 @@
-# 💼 Ivan Westlund – Developer Portfolio
+# 💼 Ivan Mendez – Developer Portfolio
 
 Welcome to my personal portfolio website — a clean and minimal showcase of my work, experience, and digital craftsmanship.  
 I’m a **software developer** focused on building high-quality mobile and web applications that combine performance, usability, and elegant design.

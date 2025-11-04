@@ -22,7 +22,7 @@ export default {
     success: 'Thanks! Your message has been sent.'
   },
   personalInfo: {
-    name: "Ivan Westlund",
+    name: "Ivan Mendez",
     title: "Software Developer",
     summary: "Versatile software developer with 5+ years of experience in mobile and web development. Skilled in building native and cross-platform mobile apps using Kotlin, Swift, and Flutter, as well as web applications with Java, Vue.js, and React. Experienced working in Agile teams, delivering scalable solutions with clean, maintainable code and strong adherence to best practices. Passionate about technology, continuous learning, and delivering high-quality user experiences.",
     email: "ivanmw97@gmail.com",

@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 
 <Layout
   title="Contact - Ivan Mendez"
-  description="Get in touch with Ivan Westlund for software development opportunities and collaborations."
+  description="Get in touch with Ivan Mendez for software development opportunities and collaborations."
 >
   <Header />
 
@@ -21,11 +21,20 @@ import Footer from "../components/Footer.astro";
         </p>
       </header>
 
-      <form
-        action="https://formspree.io/f/REPLACE_WITH_YOUR_FORMSPREE_ID"
-        method="POST"
-        class="contact-form"
-      >
+      <!-- Success/Error Messages -->
+      <div id="form-message" class="form-message hidden"></div>
+
+      <form id="contact-form" class="contact-form">
+        <!-- Honeypot for spam protection -->
+        <input
+          type="text"
+          name="_honey"
+          style="display: none;"
+          tabindex="-1"
+          autocomplete="off"
+        />
+        <input type="hidden" name="_startedAt" id="startedAt" />
+
         <div class="form-group">
           <label for="name" class="form-label">Name</label>
           <input
@@ -33,6 +42,7 @@ import Footer from "../components/Footer.astro";
             id="name"
             name="name"
             required
+            minlength="2"
             class="form-input"
             placeholder="Enter your name"
           />
@@ -57,11 +67,16 @@ import Footer from "../components/Footer.astro";
             name="message"
             rows="6"
             required
+            minlength="10"
+            maxlength="5000"
             class="form-input"
             placeholder="Your message here..."></textarea>
         </div>
 
-        <button type="submit" class="submit-button"> Send Message </button>
+        <button type="submit" class="submit-button" id="submit-btn">
+          <span class="btn-text">Send Message</span>
+          <span class="btn-loading hidden">Sending...</span>
+        </button>
       </form>
     </div>
   </main>
@@ -166,6 +181,49 @@ import Footer from "../components/Footer.astro";
     transform: translateY(0);
   }
 
+  /* Form message styles */
+  .form-message {
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+  }
+
+  .form-message.hidden {
+    display: none;
+  }
+
+  .form-message.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #6ee7b7;
+  }
+
+  .form-message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+  }
+
+  /* Button loading state */
+  .submit-button .btn-loading {
+    display: none;
+  }
+
+  .submit-button.loading .btn-text {
+    display: none;
+  }
+
+  .submit-button.loading .btn-loading {
+    display: inline;
+  }
+
+  .submit-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
   /* Mobile */
   @media (max-width: 768px) {
     .contact-page {
@@ -185,3 +243,67 @@ import Footer from "../components/Footer.astro";
     }
   }
 </style>
+
+<script>
+  // Set form start time for spam protection
+  const startedAtInput = document.getElementById(
+    "startedAt"
+  ) as HTMLInputElement;
+  if (startedAtInput) {
+    startedAtInput.value = Date.now().toString();
+  }
+
+  const form = document.getElementById("contact-form") as HTMLFormElement;
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+  const formMessage = document.getElementById("form-message") as HTMLDivElement;
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.classList.add("loading");
+    formMessage.classList.add("hidden");
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        // Success
+        formMessage.textContent =
+          "✅ Message sent successfully! I'll get back to you soon.";
+        formMessage.classList.remove("error", "hidden");
+        formMessage.classList.add("success");
+        form.reset();
+
+        // Reset start time after form reset
+        if (startedAtInput) {
+          startedAtInput.value = Date.now().toString();
+        }
+      } else {
+        // Error from API
+        formMessage.textContent = `❌ ${result.error || "Something went wrong. Please try again."}`;
+        formMessage.classList.remove("success", "hidden");
+        formMessage.classList.add("error");
+      }
+    } catch (error) {
+      // Network or other error
+      formMessage.textContent =
+        "❌ Network error. Please check your connection and try again.";
+      formMessage.classList.remove("success", "hidden");
+      formMessage.classList.add("error");
+      console.error("Form submission error:", error);
+    } finally {
+      // Re-enable button and remove loading state
+      submitBtn.disabled = false;
+      submitBtn.classList.remove("loading");
+    }
+  });
+</script>

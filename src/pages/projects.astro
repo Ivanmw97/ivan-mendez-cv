@@ -10,15 +10,8 @@ import Footer from "../components/Footer.astro";
   <main class="hero">
     <div class="hero-container">
       <h1 class="hero-title">
-        Building digital experiences<br /> with precision and purpose.
+        Under Construction<br /> Coming Soon!
       </h1>
-
-      <p class="hero-subtitle">
-        A software developer and digital creator crafting elegant and<br
-        />efficient solutions.
-      </p>
-
-      <a href="/cv" class="cta-button"> View My CV </a>
     </div>
   </main>
 
@@ -126,48 +119,4 @@ import Footer from "../components/Footer.astro";
       font-size: 0.9375rem;
     }
   }
-
-  .hero-title,
-  .hero-subtitle,
-  .cta-button {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeUp 0.8s ease forwards;
-  }
-  .hero-subtitle {
-    animation-delay: 0.15s;
-  }
-  .cta-button {
-    animation-delay: 0.3s;
-  }
-
-  @keyframes fadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .hero-container {
-    will-change: transform;
-    transform: translateY(0); /* estado inicial */
-  }
 </style>
-
-<script>
-  const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  const onScroll = () => {
-    if (reduceMotion) return;
-    const el = document.querySelector(".hero-container");
-    if (!(el instanceof HTMLElement)) return;
-
-    const offset = Math.min(window.scrollY * 0.35, 48);
-    el.style.transform = `translateY(${offset}px)`;
-  };
-
-  window.addEventListener("scroll", onScroll, { passive: true });
-  onScroll();
-</script>

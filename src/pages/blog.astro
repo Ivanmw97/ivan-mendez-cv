@@ -31,23 +31,40 @@ const formatDate = (date: Date) => {
         <p class="blog-description">
           Stories and insights from my path as a developer.
         </p>
+        <div class="blog-accent"></div>
       </header>
 
       {
         sortedPosts.length > 0 ? (
           <div class="posts-grid">
-            {sortedPosts.map((post) => (
-              <article class="post-card">
-                <a href={`/blog/${post.slug}`} class="post-link">
+            {sortedPosts.map((post, i) => (
+              <article class="post-card" style={`--i:${i}`}>
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="post-link"
+                  aria-label={`Read: ${post.data.title}`}
+                >
                   {post.data.cover && (
                     <div class="post-image">
-                      <img src={post.data.cover} alt={post.data.title} />
+                      <img
+                        src={post.data.cover}
+                        alt={post.data.title}
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
                   )}
                   <div class="post-content">
                     <h2 class="post-title">{post.data.title}</h2>
                     <time class="post-date">{formatDate(post.data.date)}</time>
                     <p class="post-description">{post.data.description}</p>
+                    {post.data.tags && post.data.tags.length > 0 && (
+                      <div class="post-tags">
+                        {post.data.tags.map((tag) => (
+                          <span class="post-tag">{tag}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </a>
               </article>
@@ -82,10 +99,13 @@ const formatDate = (date: Date) => {
   }
 
   .blog-title {
-    font-size: 3rem;
-    font-weight: var(--font-weight-bold);
+    font-size: clamp(2.25rem, 5.5vw, 3.6rem);
+    font-weight: var(--font-weight-black);
+    line-height: 1.06;
+    letter-spacing: -0.02em;
     color: var(--color-black);
-    margin-bottom: 1rem;
+
+    margin: 0 0 1rem;
   }
 
   .blog-description {
@@ -98,6 +118,7 @@ const formatDate = (date: Date) => {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 2rem;
+    align-items: stretch;
   }
 
   .post-card {
@@ -107,6 +128,20 @@ const formatDate = (date: Date) => {
     transition:
       transform var(--transition-base),
       box-shadow var(--transition-base);
+    will-change: transform, opacity;
+    opacity: 0;
+    transform: translateY(14px);
+    animation: post-reveal 0.6s ease forwards;
+    animation-delay: calc(var(--i, 0) * 90ms);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  @keyframes post-reveal {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .post-card:hover {
@@ -115,7 +150,10 @@ const formatDate = (date: Date) => {
   }
 
   .post-link {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
   }
 
   .post-image {
@@ -123,6 +161,7 @@ const formatDate = (date: Date) => {
     height: 200px;
     overflow: hidden;
     background-color: var(--color-gray-100);
+    flex: 0 0 auto;
   }
 
   .post-image img {
@@ -137,7 +176,11 @@ const formatDate = (date: Date) => {
   }
 
   .post-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
     padding: 1.5rem;
+    flex: 1;
   }
 
   .post-title {
@@ -159,6 +202,9 @@ const formatDate = (date: Date) => {
     font-size: 0.9375rem;
     color: var(--color-gray-600);
     line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 1.75rem;
+    flex: 1;
   }
 
   .empty-state {
@@ -169,6 +215,71 @@ const formatDate = (date: Date) => {
   .empty-state p {
     font-size: 1.125rem;
     color: var(--color-gray-500);
+  }
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: auto;
+  }
+  .post-tag {
+    display: inline-block;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: var(--color-gray-700);
+    background: var(--color-gray-100);
+    padding: 0.35rem 0.9rem;
+    border-radius: 9999px;
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .post-title {
+    position: relative;
+    display: inline-block;
+  }
+  .post-title::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 0%;
+    background: currentColor;
+    transition: width 0.25s ease;
+  }
+  .post-card:hover .post-title::after {
+    width: 100%;
+  }
+
+  /* ==== Animaciones del header del blog ==== */
+  @keyframes blog-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .blog-title,
+  .blog-description {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .blog-header.in-view .blog-title {
+    animation: blog-fade-up 0.7s ease forwards;
+  }
+  .blog-header.in-view .blog-description {
+    animation: blog-fade-up 0.7s ease forwards 0.15s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .blog-title,
+    .blog-description {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 
   /* Tablet */
@@ -207,3 +318,24 @@ const formatDate = (date: Date) => {
     }
   }
 </style>
+
+<script>
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    const header = document.querySelector(".blog-header");
+    if (header) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              header.classList.add("in-view");
+              observer.unobserve(header);
+            }
+          });
+        },
+        { threshold: 0.2 }
+      );
+      observer.observe(header);
+    }
+  }
+</script>

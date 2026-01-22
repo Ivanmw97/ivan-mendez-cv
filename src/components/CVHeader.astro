@@ -15,7 +15,7 @@ const { name, title, summary } = Astro.props;
       <p class="cv-title">{title}</p>
       <p class="cv-summary">{summary}</p>
 
-      <a href="#" class="download-button">
+      <button class="download-button" onclick="downloadCV()">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="18"
@@ -31,8 +31,8 @@ const { name, title, summary } = Astro.props;
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        Download CV - Not working yet
-      </a>
+        Download CV
+      </button>
     </div>
   </div>
 </section>
@@ -78,11 +78,14 @@ const { name, title, summary } = Astro.props;
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1.5rem;
-    font-size: 0.9375rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-white);
     background-color: var(--color-black);
+    color: var(--color-white);
+    border: none;
     border-radius: 0.5rem;
+    font-family: inherit;
+    font-weight: var(--font-weight-medium);
+    font-size: inherit;
+    cursor: pointer;
     transition: all var(--transition-base);
   }
 
@@ -90,6 +93,50 @@ const { name, title, summary } = Astro.props;
     transform: translateY(-2px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     opacity: 1;
+  }
+
+  /* Header animations */
+  @keyframes cv-header-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .cv-name,
+  .cv-title,
+  .cv-summary,
+  .download-button {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .cv-header.in-view .cv-name {
+    animation: cv-header-fade-up 0.7s ease forwards;
+  }
+
+  .cv-header.in-view .cv-title {
+    animation: cv-header-fade-up 0.7s ease forwards 0.15s;
+  }
+
+  .cv-header.in-view .cv-summary {
+    animation: cv-header-fade-up 0.7s ease forwards 0.3s;
+  }
+
+  .cv-header.in-view .download-button {
+    animation: cv-header-fade-up 0.7s ease forwards 0.45s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cv-name,
+    .cv-title,
+    .cv-summary,
+    .download-button {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 
   @media (max-width: 768px) {
@@ -110,3 +157,53 @@ const { name, title, summary } = Astro.props;
     }
   }
 </style>
+
+<script>
+  function downloadCV() {
+    // Set document title for the PDF
+    const originalTitle = document.title;
+    document.title = "Ivan Mendez - CV";
+
+    // Hide the download button during print
+    const downloadButton = document.querySelector(
+      ".download-button",
+    ) as HTMLElement;
+    if (downloadButton) {
+      downloadButton.style.display = "none";
+    }
+
+    // Trigger print dialog
+    window.print();
+
+    // Restore original state after print
+    setTimeout(() => {
+      document.title = originalTitle;
+      if (downloadButton) {
+        downloadButton.style.display = "inline-flex";
+      }
+    }, 100);
+  }
+
+  // Make function globally available
+  (window as any).downloadCV = downloadCV;
+
+  // Header animation
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    const cvHeader = document.querySelector(".cv-header");
+    if (cvHeader) {
+      const headerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              cvHeader.classList.add("in-view");
+              headerObserver.unobserve(cvHeader);
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+      headerObserver.observe(cvHeader);
+    }
+  }
+</script>

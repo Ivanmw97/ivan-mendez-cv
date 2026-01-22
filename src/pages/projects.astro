@@ -2,16 +2,112 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import ProjectShowcase from "../components/ProjectShowcase.astro";
+import { getProjectImage } from "../constants/images";
+
+const projects = [
+  {
+    label: "MOBILE APP",
+    title: "DelYo - Padel Match Tracker",
+    description:
+      "Track your padel journey with simplicity and privacy. A cross-platform Flutter app supporting 6 languages, offline-first architecture, and clean Material Design interface for recording matches, managing players, and viewing statistics.",
+    techStack: ["Flutter", "Dart", "Hive", "Provider"],
+    ctaText: "View Project",
+    ctaLink: "https://github.com/Ivanmw97/DelYo",
+    imageUrl: getProjectImage("delyo"),
+    imageAlt: "DelYo Padel Match Tracker Mobile App",
+  },
+  {
+    label: "CROSS-PLATFORM TOOLKIT",
+    title: "KompKit",
+    description:
+      "A lightweight cross-platform utility kit providing essential functions for Web (TypeScript), Android (Kotlin), and Flutter (Dart) development. Built as a monorepo with identical APIs across platforms, featuring debounce, email validation, and currency formatting utilities.",
+    techStack: ["TypeScript", "Kotlin", "Dart", "Monorepo"],
+    ctaText: "View Project",
+    ctaLink: "https://github.com/Kompkit/KompKit",
+    imageUrl: getProjectImage("kompkit"),
+    imageAlt: "KompKit Cross-Platform Utility Toolkit",
+  },
+  {
+    label: "WEB APPLICATION",
+    title: "Financial Manager",
+    description:
+      "A modern web application to track your personal finances, monitor spending, and stay on top of your budget. Built with Vue 3, TypeScript, and Vite for speed, simplicity, and scalability. Features dashboard with real-time overview, budget management, and visual charts with Supabase integration.",
+    techStack: ["Vue 3", "TypeScript", "Vite", "Pinia", "Supabase"],
+    ctaText: "View Live Demo",
+    ctaLink: "https://ivanmw97.github.io/financial-manager",
+    imageUrl: getProjectImage("financialManager"),
+    imageAlt: "Financial Manager Web Application Dashboard",
+  },
+  {
+    label: "MOBILE APPLICATION",
+    title: "CryptoTracker",
+    description:
+      "A mobile application developed in Kotlin for real-time cryptocurrency tracking. Features live price monitoring, detailed cryptocurrency information with interactive charts, search functionality, favorites management, and dynamic themes. Built with MVVM architecture, Jetpack Compose, and modern Android development practices.",
+    techStack: ["Kotlin", "Jetpack Compose", "Ktor", "Room", "Koin"],
+    ctaText: "View Project",
+    ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
+    imageUrl: getProjectImage("cryptotracker"),
+    imageAlt: "CryptoTracker Mobile Application Screenshots",
+    isCollage: true,
+    collageImages: [
+      "/assets/images/projects/cryptotracker/crypto-tracker-1.png",
+      "/assets/images/projects/cryptotracker/crypto-tracker-2.png",
+      "/assets/images/projects/cryptotracker/crypto-tracker-3.png",
+      "/assets/images/projects/cryptotracker/crypto-tracker-4.png"
+    ],
+  },
+  {
+    label: "LANDING PAGE",
+    title: "NovaFlow",
+    description:
+      "AI-Powered Task Management platform designed by Modulum Studio. A sleek and modern concept showcasing design and development capabilities with cutting-edge technologies. Features clean minimalist design, seamless internationalization (English/Spanish), dark mode support, and responsive layouts that prioritize both aesthetics and functionality.",
+    techStack: ["Astro", "TypeScript", "TailwindCSS"],
+    ctaText: "View Live Demo",
+    ctaLink: "https://modulum-studio.github.io/nova-flow/",
+    imageUrl: getProjectImage("novaflow"),
+    imageAlt: "NovaFlow AI Task Management Landing Page",
+  },
+];
+
 ---
 
-<Layout title="Ivan Mendez – Software Developer">
+<Layout
+  title="Projects - Ivan Mendez"
+  description="Selected works and experiments in web and mobile development."
+>
   <Header />
 
-  <main class="hero">
-    <div class="hero-container">
-      <h1 class="hero-title">
-        Under Construction<br /> Coming Soon!
-      </h1>
+  <main class="projects-page">
+    <div class="projects-container">
+      <header class="projects-header">
+        <h1 class="projects-title">Projects</h1>
+        <p class="projects-description">
+          Selected works and experiments in web and mobile development,
+          showcasing my passion for creating elegant and effective digital
+          solutions.
+        </p>
+      </header>
+
+      <div class="projects-showcase">
+        {
+          projects.map((project, index) => (
+            <ProjectShowcase
+              label={project.label}
+              title={project.title}
+              description={project.description}
+              techStack={project.techStack}
+              ctaText={project.ctaText}
+              ctaLink={project.ctaLink}
+              imageUrl={project.imageUrl}
+              imageAlt={project.imageAlt}
+              reversed={index % 2 === 1}
+              isCollage={project.isCollage || false}
+              collageImages={project.collageImages || []}
+            />
+          ))
+        }
+      </div>
     </div>
   </main>
 
@@ -19,104 +115,129 @@ import Footer from "../components/Footer.astro";
 </Layout>
 
 <style>
-  .hero {
+  .projects-page {
     min-height: calc(100vh - 4.5rem);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 4rem 2rem;
-    background-color: var(--color-gray-50);
+    background-color: white;
   }
 
-  .hero-container {
-    max-width: 56rem;
+  .projects-container {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  .projects-header {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+    padding: 4rem 2rem 2rem;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
   }
 
-  .hero-title {
-    font-size: 3.75rem;
+  .projects-title {
+    font-size: clamp(2.25rem, 5.5vw, 3.6rem);
     font-weight: var(--font-weight-black);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
+    line-height: 1.06;
+    letter-spacing: -0.02em;
     color: var(--color-black);
-    margin: 0;
+    margin: 0 0 1rem;
   }
 
-  .hero-subtitle {
-    font-size: 1.25rem;
-    font-weight: var(--font-weight-normal);
-    line-height: 1.6;
+  .projects-description {
+    font-size: 1.125rem;
     color: var(--color-gray-600);
     max-width: 42rem;
+    margin: 0 auto;
+    line-height: 1.6;
   }
 
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-white);
-    background-color: var(--color-black);
-    border-radius: 2rem;
-    transition: all var(--transition-base);
-    margin-top: 1rem;
+  .projects-showcase {
+    margin-top: 2rem;
   }
 
-  .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-    opacity: 1;
-  }
-
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .hero-title {
-      font-size: 3rem;
+  /* Header animations */
+  @keyframes projects-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
+  }
 
-    .hero-subtitle {
-      font-size: 1.125rem;
+  .projects-title,
+  .projects-description {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .projects-header.in-view .projects-title {
+    animation: projects-fade-up 0.7s ease forwards;
+  }
+
+  .projects-header.in-view .projects-description {
+    animation: projects-fade-up 0.7s ease forwards 0.15s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .projects-title,
+    .projects-description {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
     }
   }
 
   /* Mobile */
   @media (max-width: 768px) {
-    .hero {
-      min-height: calc(100vh - 4rem);
-      padding: 3rem 1.5rem;
+    .projects-header {
+      padding: 3rem 1.5rem 1rem;
     }
 
-    .hero-title {
-      font-size: 2.25rem;
+    .projects-title {
+      font-size: 2rem;
     }
 
-    .hero-subtitle {
+    .projects-description {
       font-size: 1rem;
     }
+  }
+}</style>
 
-    .hero-subtitle br {
-      display: none;
+<script>
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    const header = document.querySelector(".projects-header");
+    if (header) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              header.classList.add("in-view");
+              observer.unobserve(header);
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+      observer.observe(header);
+    }
+
+    // Animate project showcases
+    const projects = document.querySelectorAll(".project-showcase");
+    if (projects.length > 0) {
+      const projectObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              projectObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      
+      projects.forEach((project) => {
+        projectObserver.observe(project);
+      });
     }
   }
-
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 1.875rem;
-    }
-
-    .hero-title br {
-      display: none;
-    }
-
-    .cta-button {
-      padding: 0.75rem 1.75rem;
-      font-size: 0.9375rem;
-    }
-  }
-</style>
+</script>

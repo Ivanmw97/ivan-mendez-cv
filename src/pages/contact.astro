@@ -242,12 +242,55 @@ import Footer from "../components/Footer.astro";
       display: none;
     }
   }
+
+  /* Contact animations */
+  @keyframes contact-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .contact-title,
+  .contact-subtitle {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .contact-header.in-view .contact-title {
+    animation: contact-fade-up 0.7s ease forwards;
+  }
+
+  .contact-header.in-view .contact-subtitle {
+    animation: contact-fade-up 0.7s ease forwards 0.15s;
+  }
+
+  .contact-form {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .contact-form.in-view {
+    animation: contact-fade-up 0.7s ease forwards 0.3s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contact-title,
+    .contact-subtitle,
+    .contact-form {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 </style>
 
 <script>
   // Set form start time for spam protection
   const startedAtInput = document.getElementById(
-    "startedAt"
+    "startedAt",
   ) as HTMLInputElement;
   if (startedAtInput) {
     startedAtInput.value = Date.now().toString();
@@ -306,4 +349,41 @@ import Footer from "../components/Footer.astro";
       submitBtn.classList.remove("loading");
     }
   });
+
+  // Contact animations
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    const contactHeader = document.querySelector(".contact-header");
+    const contactForm = document.querySelector(".contact-form");
+
+    if (contactHeader) {
+      const headerObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              contactHeader.classList.add("in-view");
+              headerObserver.unobserve(contactHeader);
+            }
+          });
+        },
+        { threshold: 0.2 },
+      );
+      headerObserver.observe(contactHeader);
+    }
+
+    if (contactForm) {
+      const formObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              contactForm.classList.add("in-view");
+              formObserver.unobserve(contactForm);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+      formObserver.observe(contactForm);
+    }
+  }
 </script>

@@ -1,12 +1,12 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import CVHeader from '../components/CVHeader.astro';
-import Skills from '../components/Skills.astro';
-import Experience from '../components/Experience.astro';
-import Projects from '../components/Projects.astro';
-import { useTranslations } from '../i18n/utils';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import CVHeader from "../components/CVHeader.astro";
+import Skills from "../components/Skills.astro";
+import Experience from "../components/Experience.astro";
+import Projects from "../components/Projects.astro";
+import { useTranslations } from "../i18n/utils";
 
 const t = useTranslations();
 ---
@@ -14,8 +14,65 @@ const t = useTranslations();
 <Layout title={`${t.personalInfo.name} - ${t.personalInfo.title}`}>
   <Header />
   <CVHeader {...t.personalInfo} />
-  <Experience experiences={t.experiences} />
-  <Skills skills={t.skills} />
-  <Projects projects={t.projects} />
+  <div class="cv-section-animated">
+    <Experience experiences={t.experiences} />
+  </div>
+  <div class="cv-section-animated">
+    <Skills skills={t.skills} />
+  </div>
+  <div class="cv-section-animated">
+    <Projects projects={t.projects} />
+  </div>
   <Footer />
 </Layout>
+
+<style>
+  .cv-section-animated {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .cv-section-animated.in-view {
+    animation: cv-fade-up 0.7s ease forwards;
+  }
+
+  @keyframes cv-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cv-section-animated {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!reduce) {
+    const cvSections = document.querySelectorAll(".cv-section-animated");
+    if (cvSections.length > 0) {
+      const cvObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in-view");
+              cvObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      cvSections.forEach((section) => {
+        cvObserver.observe(section);
+      });
+    }
+  }
+</script>

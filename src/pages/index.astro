@@ -18,7 +18,12 @@ import Footer from "../components/Footer.astro";
         />efficient solutions.
       </p>
 
-      <a href="/cv" class="cta-button"> View My CV </a>
+      <div class="cta-buttons">
+        <a href="/cv" class="cta-button cta-button--primary"> View My CV </a>
+        <a href="/projects" class="cta-button cta-button--secondary">
+          View Projects
+        </a>
+      </div>
     </div>
   </main>
 
@@ -61,6 +66,14 @@ import Footer from "../components/Footer.astro";
     max-width: 42rem;
   }
 
+  .cta-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .cta-button {
     display: inline-flex;
     align-items: center;
@@ -68,17 +81,34 @@ import Footer from "../components/Footer.astro";
     padding: 0.875rem 2rem;
     font-size: 1rem;
     font-weight: var(--font-weight-medium);
-    color: var(--color-white);
-    background-color: var(--color-black);
     border-radius: 2rem;
     transition: all var(--transition-base);
-    margin-top: 1rem;
+    text-decoration: none;
+  }
+
+  .cta-button--primary {
+    color: var(--color-white);
+    background-color: var(--color-black);
+  }
+
+  .cta-button--secondary {
+    color: var(--color-black);
+    background-color: var(--color-white);
+    border: 1px solid var(--color-gray-300);
   }
 
   .cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
     opacity: 1;
+  }
+
+  .cta-button--primary:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .cta-button--secondary:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    border-color: var(--color-gray-400);
   }
 
   /* Tablet */
@@ -121,6 +151,11 @@ import Footer from "../components/Footer.astro";
       display: none;
     }
 
+    .cta-buttons {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
     .cta-button {
       padding: 0.75rem 1.75rem;
       font-size: 0.9375rem;
@@ -129,7 +164,7 @@ import Footer from "../components/Footer.astro";
 
   .hero-title,
   .hero-subtitle,
-  .cta-button {
+  .cta-buttons {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUp 0.8s ease forwards;
@@ -137,7 +172,7 @@ import Footer from "../components/Footer.astro";
   .hero-subtitle {
     animation-delay: 0.15s;
   }
-  .cta-button {
+  .cta-buttons {
     animation-delay: 0.3s;
   }
 
@@ -156,7 +191,7 @@ import Footer from "../components/Footer.astro";
 
 <script>
   const reduceMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
+    "(prefers-reduced-motion: reduce)",
   ).matches;
 
   const onScroll = () => {

@@ -1,0 +1,311 @@
+---
+export interface Props {
+  label: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  ctaText: string;
+  ctaLink: string;
+  imageUrl: string;
+  imageAlt: string;
+  reversed?: boolean;
+  isCollage?: boolean;
+  collageImages?: string[];
+}
+
+const {
+  label,
+  title,
+  description,
+  techStack,
+  ctaText,
+  ctaLink,
+  imageUrl,
+  imageAlt,
+  reversed = false,
+  isCollage = false,
+  collageImages = [],
+} = Astro.props;
+---
+
+<section
+  class={`project-showcase ${reversed ? "project-showcase--reversed" : ""}`}
+>
+  <div class="project-showcase__container">
+    <div class="project-showcase__content">
+      <div class="project-showcase__text">
+        <span class="project-showcase__label">{label}</span>
+        <h2 class="project-showcase__title">{title}</h2>
+        <p class="project-showcase__description">{description}</p>
+        <div class="project-showcase__tech-stack">
+          {
+            techStack.map((tech) => (
+              <span class="project-showcase__tech-tag">{tech}</span>
+            ))
+          }
+        </div>
+        <a href={ctaLink} class="project-showcase__cta">
+          {ctaText}
+          <svg
+            class="project-showcase__cta-icon"
+            width="16"
+            height="16"
+            viewBox="0 0 16 16"
+            fill="none"
+          >
+            <path
+              d="M6 3L11 8L6 13"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"></path>
+          </svg>
+        </a>
+      </div>
+      <div class="project-showcase__image">
+        {
+          isCollage && collageImages.length > 0 ? (
+            <div class="project-showcase__collage">
+              {collageImages.map((image, index) => (
+                <img
+                  src={image}
+                  alt={`${imageAlt} - Screenshot ${index + 1}`}
+                  class="project-showcase__collage-img"
+                  loading="lazy"
+                />
+              ))}
+            </div>
+          ) : (
+            <img
+              src={imageUrl}
+              alt={imageAlt}
+              class="project-showcase__img"
+              loading="lazy"
+            />
+          )
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-showcase {
+    padding: 4rem 0;
+  }
+
+  @media (min-width: 768px) {
+    .project-showcase {
+      padding: 6rem 0;
+    }
+  }
+
+  .project-showcase__container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .project-showcase__container {
+      padding: 0 2rem;
+    }
+  }
+
+  .project-showcase__content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .project-showcase__content {
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .project-showcase--reversed .project-showcase__text {
+    order: 1;
+  }
+
+  .project-showcase--reversed .project-showcase__image {
+    order: 2;
+  }
+
+  @media (min-width: 1024px) {
+    .project-showcase--reversed .project-showcase__text {
+      order: 2;
+    }
+
+    .project-showcase--reversed .project-showcase__image {
+      order: 1;
+    }
+  }
+
+  .project-showcase__label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 1rem;
+  }
+
+  .project-showcase__title {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  @media (min-width: 768px) {
+    .project-showcase__title {
+      font-size: 2.25rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .project-showcase__title {
+      font-size: 3rem;
+    }
+  }
+
+  .project-showcase__description {
+    font-size: 1.125rem;
+    color: #4b5563;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+
+  .project-showcase__tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .project-showcase__tech-tag {
+    padding: 0.25rem 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+    background-color: #f3f4f6;
+    border-radius: 9999px;
+  }
+
+  .project-showcase__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #111827;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .project-showcase__cta:hover {
+    color: #374151;
+  }
+
+  .project-showcase__cta-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .project-showcase__cta:hover .project-showcase__cta-icon {
+    transform: translateX(0.25rem);
+  }
+
+  .project-showcase__image {
+    position: relative;
+  }
+
+  .project-showcase__img {
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
+    border-radius: 1rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    transition: box-shadow 0.3s ease;
+  }
+
+  .project-showcase:hover .project-showcase__img {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  }
+
+  .project-showcase__collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-height: 500px;
+  }
+
+  .project-showcase__collage-img {
+    width: 100%;
+    height: auto;
+    max-height: 240px;
+    object-fit: contain;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+    background-color: #f8fafc;
+  }
+
+  .project-showcase:hover .project-showcase__collage-img {
+    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.25);
+    transform: translateY(-2px);
+  }
+
+  /* Project animations */
+  @keyframes project-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .project-showcase {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .project-showcase.in-view {
+    animation: project-fade-up 0.7s ease forwards;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project-showcase {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 1023px) {
+    .project-showcase__content {
+      text-align: center;
+    }
+
+    .project-showcase__image {
+      order: -1;
+    }
+
+    .project-showcase--reversed .project-showcase__image {
+      order: -1;
+    }
+
+    .project-showcase--reversed .project-showcase__text {
+      order: 1;
+    }
+  }
+</style>

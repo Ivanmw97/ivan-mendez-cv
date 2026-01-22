@@ -82,16 +82,34 @@ export default {
   ],
   projects: [
     {
-      title: "CryptoTracker",
-      description: "CryptoTracker is a mobile application developed in Kotlin, designed for real-time cryptocurrency tracking. It enables users to monitor prices, analyze trends, and access information on various digital currencies through an intuitive interface.",
-      technologies: ["Kotlin", "MVVM", "Ktor", "Jetpack Compose", "Koin", "Room Database", "JUnit and MockK", "Espresso", "CoinCap API", "Coroutines", "Material Design 3"],
-      link: "https://github.com/Ivanmw97/CryptoTracker"
+      title: "DelYo - Padel Match Tracker",
+      description: "Track your padel journey with simplicity and privacy. A cross-platform Flutter app supporting 6 languages, offline-first architecture, and clean Material Design interface for recording matches, managing players, and viewing statistics.",
+      technologies: ["Flutter", "Dart", "Hive", "Provider", "Material Design", "Internationalization"],
+      link: "https://github.com/Ivanmw97/DelYo"
+    },
+    {
+      title: "KompKit",
+      description: "A lightweight cross-platform utility kit providing essential functions for Web (TypeScript), Android (Kotlin), and Flutter (Dart) development. Built as a monorepo with identical APIs across platforms, featuring debounce, email validation, and currency formatting utilities.",
+      technologies: ["TypeScript", "Kotlin", "Dart", "Monorepo", "Cross-platform", "Utilities"],
+      link: "https://github.com/Kompkit/KompKit"
     },
     {
       title: "Financial Manager",
-      description: "A modern web application for tracking personal finances, managing budgets, and monitoring expenses",
-      technologies: ["Vue 3", "TypeScript", "Vite", "Tailwind CSS", "Pinia", "SupaBase", "Testing with Vitest", "Material Design"],
-      link: "https://github.com/Ivanmw97/gestor-gastos"
+      description: "A modern web application to track your personal finances, monitor spending, and stay on top of your budget. Built with Vue 3, TypeScript, and Vite for speed, simplicity, and scalability. Features dashboard with real-time overview, budget management, and visual charts with Supabase integration.",
+      technologies: ["Vue 3", "TypeScript", "Vite", "Pinia", "Supabase", "TailwindCSS"],
+      link: "https://ivanmw97.github.io/financial-manager"
+    },
+    {
+      title: "CryptoTracker",
+      description: "A mobile application developed in Kotlin for real-time cryptocurrency tracking. Features live price monitoring, detailed cryptocurrency information with interactive charts, search functionality, favorites management, and dynamic themes. Built with MVVM architecture, Jetpack Compose, and modern Android development practices.",
+      technologies: ["Kotlin", "Jetpack Compose", "Ktor", "Room", "Koin", "MVVM", "Material Design 3"],
+      link: "https://github.com/Ivanmw97/CryptoTracker"
+    },
+    {
+      title: "NovaFlow",
+      description: "AI-Powered Task Management platform designed by Modulum Studio. A sleek and modern concept showcasing design and development capabilities with cutting-edge technologies. Features clean minimalist design, seamless internationalization (English/Spanish), dark mode support, and responsive layouts that prioritize both aesthetics and functionality.",
+      technologies: ["Astro", "TypeScript", "TailwindCSS", "Internationalization", "Dark Mode"],
+      link: "https://modulum-studio.github.io/nova-flow/"
     }
   ]
 };

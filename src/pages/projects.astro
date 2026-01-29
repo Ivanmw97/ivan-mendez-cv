@@ -48,14 +48,7 @@ const projects = [
     ctaText: "View Project",
     ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
     imageUrl: getProjectImage("cryptotracker"),
-    imageAlt: "CryptoTracker Mobile Application Screenshots",
-    isCollage: true,
-    collageImages: [
-      "/assets/images/projects/cryptotracker/crypto-tracker-1.png",
-      "/assets/images/projects/cryptotracker/crypto-tracker-2.png",
-      "/assets/images/projects/cryptotracker/crypto-tracker-3.png",
-      "/assets/images/projects/cryptotracker/crypto-tracker-4.png"
-    ],
+    imageAlt: "CryptoTracker Mobile Application Banner",
   },
   {
     label: "LANDING PAGE",
@@ -102,8 +95,6 @@ const projects = [
               imageUrl={project.imageUrl}
               imageAlt={project.imageAlt}
               reversed={index % 2 === 1}
-              isCollage={project.isCollage || false}
-              collageImages={project.collageImages || []}
             />
           ))
         }

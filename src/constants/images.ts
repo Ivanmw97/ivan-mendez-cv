@@ -19,11 +19,7 @@ export const PROJECT_IMAGES = {
     placeholder: 'https://placehold.co/800x500/DC2626/FFFFFF?text=KompKit'
   },
   cryptotracker: {
-    main: '/assets/images/projects/cryptotracker/crypto-tracker-1.png',
-    image1: '/assets/images/projects/cryptotracker/crypto-tracker-1.png',
-    image2: '/assets/images/projects/cryptotracker/crypto-tracker-2.png',
-    image3: '/assets/images/projects/cryptotracker/crypto-tracker-3.png',
-    image4: '/assets/images/projects/cryptotracker/crypto-tracker-4.png',
+    main: '/assets/images/projects/cryptotracker/CT-banner.png',
     placeholder: 'https://placehold.co/800x500/F59E0B/FFFFFF?text=CryptoTracker'
   },
   novaflow: {

@@ -18,7 +18,16 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, remarkPluginFrontmatter } = await post.render();
+
+// Calculate read time based on content (average 200 words per minute)
+const calculateReadTime = (content: string): number => {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.max(1, Math.ceil(words / wordsPerMinute));
+};
+
+const readTime = post.body ? calculateReadTime(post.body) : 3;
 
 const formatDate = (date: Date) => {
   return new Intl.DateTimeFormat("en-US", {
@@ -37,6 +46,23 @@ const formatDate = (date: Date) => {
 
   <main class="post-page">
     <article class="post-container">
+      <a href="/blog" class="back-link">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M19 12H5M12 19l-7-7 7-7"></path>
+        </svg>
+        Back to Blog
+      </a>
+
       <header class="post-header">
         <h1 class="post-title">
           {post.data.title}
@@ -47,32 +73,13 @@ const formatDate = (date: Date) => {
           <span class="post-separator">•</span>
           <time class="post-date">{formatDate(post.data.date)}</time>
           <span class="post-separator">•</span>
-          <span class="post-read-time">3 min read</span>
+          <span class="post-read-time">{readTime} min read</span>
         </div>
       </header>
 
       <div class="post-content prose">
         <Content />
       </div>
-
-      <footer class="post-footer">
-        <a href="/blog" class="back-link">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path d="M19 12H5M12 19l-7-7 7-7"></path>
-          </svg>
-          Back to Blog
-        </a>
-      </footer>
     </article>
   </main>
 
@@ -89,6 +96,22 @@ const formatDate = (date: Date) => {
   .post-container {
     max-width: var(--max-width-text);
     margin: 0 auto;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: var(--font-weight-medium);
+    color: var(--color-gray-600);
+    transition: color var(--transition-fast);
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--color-black);
+    opacity: 1;
   }
 
   .post-header {
@@ -127,9 +150,10 @@ const formatDate = (date: Date) => {
 
   /* Prose styles for blog content */
   .prose {
-    color: var(--color-black);
-    font-size: 1.0625rem;
-    line-height: 1.8;
+    color: var(--color-gray-800);
+    font-size: 1.125rem;
+    line-height: 1.85;
+    letter-spacing: -0.01em;
   }
 
   .prose :global(h1),
@@ -138,75 +162,138 @@ const formatDate = (date: Date) => {
   .prose :global(h4) {
     color: var(--color-black);
     font-weight: var(--font-weight-bold);
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    line-height: 1.3;
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
+  .prose :global(h1) {
+    display: none;
   }
 
   .prose :global(h2) {
-    font-size: 1.875rem;
+    font-size: 1.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-gray-200);
   }
 
   .prose :global(h3) {
-    font-size: 1.5rem;
+    font-size: 1.375rem;
+    color: var(--color-gray-900);
+  }
+
+  .prose :global(h4) {
+    font-size: 1.125rem;
+    color: var(--color-gray-800);
   }
 
   .prose :global(p) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
   }
 
   .prose :global(a) {
     color: var(--color-black);
     text-decoration: underline;
-    text-underline-offset: 2px;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    transition: opacity var(--transition-fast);
   }
 
   .prose :global(a:hover) {
-    opacity: 0.7;
+    opacity: 0.6;
   }
 
   .prose :global(code) {
     background: var(--color-gray-100);
     color: var(--color-gray-800);
-    padding: 0.2rem 0.4rem;
-    border-radius: 0.25rem;
-    font-size: 0.9em;
-    font-family: "SF Mono", "Monaco", "Courier New", monospace;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.875em;
+    font-family: "SF Mono", "Monaco", "Consolas", monospace;
+    font-weight: 500;
   }
 
   .prose :global(pre) {
-    background: var(--color-gray-900);
-    color: var(--color-gray-100);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
+    background: #1a1a2e;
+    color: #e4e4e7;
+    padding: 1.5rem 1.75rem;
+    border-radius: 0.75rem;
     overflow-x: auto;
     margin: 2rem 0;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
   .prose :global(pre code) {
     background: transparent;
     color: inherit;
     padding: 0;
-    font-size: 0.875rem;
-    line-height: 1.7;
+    font-size: inherit;
+    font-weight: normal;
+    line-height: inherit;
   }
 
   .prose :global(ul),
   .prose :global(ol) {
-    margin: 1.5rem 0;
-    padding-left: 1.75rem;
+    margin: 1.75rem 0;
+    padding-left: 1.5rem;
   }
 
-  .prose :global(li) {
-    margin-bottom: 0.5rem;
+  .prose :global(ul) {
+    list-style-type: none;
+  }
+
+  .prose :global(ul li) {
+    position: relative;
+    padding-left: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose :global(ul li::before) {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-gray-400);
+    border-radius: 50%;
+  }
+
+  .prose :global(ol) {
+    list-style-type: decimal;
+  }
+
+  .prose :global(ol li) {
+    margin-bottom: 0.75rem;
+    padding-left: 0.5rem;
+  }
+
+  .prose :global(li strong) {
+    color: var(--color-black);
   }
 
   .prose :global(blockquote) {
-    border-left: 3px solid var(--color-gray-300);
-    padding-left: 1.5rem;
+    border-left: 4px solid var(--color-black);
+    padding: 1rem 1.5rem;
     margin: 2rem 0;
+    background: var(--color-gray-50);
+    border-radius: 0 0.5rem 0.5rem 0;
     font-style: italic;
-    color: var(--color-gray-600);
+    color: var(--color-gray-700);
+  }
+
+  .prose :global(blockquote p) {
+    margin-bottom: 0;
+  }
+
+  .prose :global(blockquote p:not(:last-child)) {
+    margin-bottom: 1rem;
   }
 
   .prose :global(strong) {
@@ -214,56 +301,146 @@ const formatDate = (date: Date) => {
     color: var(--color-black);
   }
 
+  .prose :global(em) {
+    font-style: italic;
+    color: var(--color-gray-700);
+  }
+
   .prose :global(img) {
-    border-radius: 0.5rem;
-    margin: 2rem 0;
+    border-radius: 0.75rem;
+    margin: 2.5rem 0;
+    box-shadow:
+      0 4px 6px -1px rgba(0, 0, 0, 0.1),
+      0 2px 4px -1px rgba(0, 0, 0, 0.06);
   }
 
-  .post-footer {
-    padding-top: 2rem;
+  .prose :global(hr) {
+    border: none;
     border-top: 1px solid var(--color-gray-200);
+    margin: 3rem 0;
   }
 
-  .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
     font-size: 0.9375rem;
-    font-weight: var(--font-weight-medium);
-    color: var(--color-gray-600);
-    transition: color var(--transition-fast);
   }
 
-  .back-link:hover {
-    color: var(--color-black);
-    opacity: 1;
+  .prose :global(th),
+  .prose :global(td) {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--color-gray-200);
+    text-align: left;
+  }
+
+  .prose :global(th) {
+    background: var(--color-gray-50);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* Blog post animations */
+  @keyframes blog-fade-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .back-link,
+  .post-header,
+  .post-content {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  .post-container.in-view .back-link {
+    animation: blog-fade-up 0.7s ease forwards;
+  }
+
+  .post-container.in-view .post-header {
+    animation: blog-fade-up 0.7s ease forwards 0.15s;
+  }
+
+  .post-container.in-view .post-content {
+    animation: blog-fade-up 0.7s ease forwards 0.3s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-link,
+    .post-header,
+    .post-content {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 
   /* Mobile */
   @media (max-width: 768px) {
     .post-page {
-      padding: 3rem 1.5rem;
+      padding: 2.5rem 1.25rem;
     }
 
     .post-title {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
 
     .post-meta {
       flex-wrap: wrap;
-      font-size: 0.875rem;
+      font-size: 0.8125rem;
+      gap: 0.5rem;
     }
 
     .prose {
       font-size: 1rem;
+      line-height: 1.75;
     }
 
     .prose :global(h2) {
-      font-size: 1.5rem;
+      font-size: 1.375rem;
+      margin-top: 2.5rem;
     }
 
     .prose :global(h3) {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
+    }
+
+    .prose :global(pre) {
+      padding: 1.25rem;
+      font-size: 0.8125rem;
+      border-radius: 0.5rem;
+      margin: 1.5rem -1.25rem;
+      border-radius: 0;
+    }
+
+    .prose :global(blockquote) {
+      padding: 0.875rem 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .prose :global(ul li),
+    .prose :global(ol li) {
+      margin-bottom: 0.625rem;
     }
   }
 </style>
+
+<script>
+  // Blog post animations - trigger on page load
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const postContainer = document.querySelector(".post-container");
+
+  if (postContainer) {
+    if (reduce) {
+      // If reduced motion, show content immediately without animation
+      postContainer.classList.add("in-view");
+    } else {
+      // Small delay to ensure CSS is loaded, then trigger animation
+      requestAnimationFrame(() => {
+        postContainer.classList.add("in-view");
+      });
+    }
+  }
+</script>

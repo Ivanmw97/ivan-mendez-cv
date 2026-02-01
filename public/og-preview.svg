@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  
+  <!-- Subtle grid pattern -->
+  <defs>
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#f5f5f5" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  
+  <!-- Content container -->
+  <g transform="translate(100, 200)">
+    <!-- Name -->
+    <text x="0" y="0" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="72" font-weight="700" fill="#0a0a0a" letter-spacing="-2">Ivan Mendez</text>
+    
+    <!-- Title -->
+    <text x="0" y="70" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="36" font-weight="400" fill="#525252">Software Developer</text>
+    
+    <!-- Separator line -->
+    <rect x="0" y="110" width="120" height="4" fill="#0a0a0a"/>
+    
+    <!-- Tagline -->
+    <text x="0" y="170" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="24" font-weight="400" fill="#737373">Mobile &amp; Web Development</text>
+  </g>
+  
+  <!-- Website URL bottom right -->
+  <text x="1100" y="580" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="20" font-weight="500" fill="#a3a3a3" text-anchor="end">ivanmendez.dev</text>
+  
+  <!-- Initials badge top right -->
+  <g transform="translate(1020, 50)">
+    <rect width="80" height="80" rx="12" fill="#0a0a0a"/>
+    <text x="40" y="52" font-family="system-ui, -apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="700" fill="#ffffff" text-anchor="middle">IM</text>
+  </g>
+</svg>

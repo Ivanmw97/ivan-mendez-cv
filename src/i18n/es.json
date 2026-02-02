@@ -1,0 +1,53 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "blog": "Blog",
+    "projects": "Proyectos",
+    "cv": "CV",
+    "contact": "Contacto"
+  },
+  "home": {
+    "title": "Ivan Mendez – Desarrollador de Software",
+    "heroTitle": "Creando experiencias digitales con precisión y propósito.",
+    "heroSubtitle": "Un desarrollador de software y creador digital que diseña soluciones elegantes y eficientes.",
+    "viewCV": "Ver Mi CV",
+    "viewProjects": "Ver Proyectos"
+  },
+  "projects": {
+    "title": "Proyectos - Ivan Mendez",
+    "pageTitle": "Proyectos",
+    "description": "Trabajos seleccionados y experimentos en desarrollo web y móvil, mostrando mi pasión por crear soluciones digitales elegantes y efectivas.",
+    "viewProject": "Ver Proyecto",
+    "viewLiveDemo": "Ver Demo"
+  },
+  "contact": {
+    "title": "Contacto - Ivan Mendez",
+    "pageTitle": "Contacta Conmigo",
+    "description": "¿Tienes un proyecto en mente o simplemente quieres saludar? Me encantaría saber de ti.",
+    "nameLabel": "Nombre",
+    "namePlaceholder": "Tu nombre",
+    "emailLabel": "Email",
+    "emailPlaceholder": "tu@email.com",
+    "messageLabel": "Mensaje",
+    "messagePlaceholder": "Tu mensaje...",
+    "send": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "successTitle": "¡Mensaje Enviado!",
+    "successMessage": "Gracias por contactarme. Te responderé pronto.",
+    "errorTitle": "Error",
+    "errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo."
+  },
+  "cv": {
+    "title": "CV - Ivan Mendez"
+  },
+  "blog": {
+    "title": "Blog - Ivan Mendez",
+    "pageTitle": "Blog",
+    "description": "Pensamientos, tutoriales e ideas sobre desarrollo de software.",
+    "readMore": "Leer más",
+    "minRead": "min de lectura"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  }
+}

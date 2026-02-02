@@ -6,7 +6,7 @@ import Footer from "../components/Footer.astro";
 
 const allPosts = await getCollection("blog");
 const sortedPosts = allPosts.sort(
-  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
 
 const formatDate = (date: Date) => {
@@ -27,9 +27,9 @@ const formatDate = (date: Date) => {
   <main class="blog-page">
     <div class="blog-container">
       <header class="blog-header">
-        <h1 class="blog-title">The Dev Journal</h1>
-        <p class="blog-description">
-          Stories and insights from my path as a developer.
+        <h1 class="blog-title" data-i18n="blog.pageTitle">Blog</h1>
+        <p class="blog-description" data-i18n="blog.description">
+          Thoughts, tutorials, and insights on software development.
         </p>
         <div class="blog-accent"></div>
       </header>
@@ -38,7 +38,11 @@ const formatDate = (date: Date) => {
         sortedPosts.length > 0 ? (
           <div class="posts-grid">
             {sortedPosts.map((post, i) => (
-              <article class="post-card" style={`--i:${i}`}>
+              <article
+                class="post-card"
+                style={`--i:${i}`}
+                data-lang={post.data.lang || "en"}
+              >
                 <a
                   href={`/blog/${post.slug}`}
                   class="post-link"
@@ -88,6 +92,9 @@ const formatDate = (date: Date) => {
     padding: 4rem 2rem;
     background-color: var(--color-gray-50);
   }
+  :global([data-theme="dark"]) .blog-page {
+    background-color: #0a0a0a;
+  }
 
   .blog-container {
     max-width: var(--max-width-content);
@@ -104,14 +111,19 @@ const formatDate = (date: Date) => {
     line-height: 1.06;
     letter-spacing: -0.02em;
     color: var(--color-black);
-
     margin: 0 0 1rem;
+  }
+  :global([data-theme="dark"]) .blog-title {
+    color: #ffffff;
   }
 
   .blog-description {
     font-size: 1.125rem;
     color: var(--color-gray-600);
     max-width: 42rem;
+  }
+  :global([data-theme="dark"]) .blog-description {
+    color: #a3a3a3;
   }
 
   .posts-grid {
@@ -136,6 +148,9 @@ const formatDate = (date: Date) => {
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+  :global([data-theme="dark"]) .post-card {
+    background-color: #171717;
   }
   @keyframes post-reveal {
     to {
@@ -190,6 +205,9 @@ const formatDate = (date: Date) => {
     margin-bottom: 0.5rem;
     line-height: 1.4;
   }
+  :global([data-theme="dark"]) .post-title {
+    color: #ffffff;
+  }
 
   .post-date {
     display: block;
@@ -205,6 +223,9 @@ const formatDate = (date: Date) => {
     flex-grow: 1;
     margin-bottom: 1.75rem;
     flex: 1;
+  }
+  :global([data-theme="dark"]) .post-description {
+    color: #a3a3a3;
   }
 
   .empty-state {
@@ -232,6 +253,10 @@ const formatDate = (date: Date) => {
     border-radius: 9999px;
     white-space: nowrap;
     user-select: none;
+  }
+  :global([data-theme="dark"]) .post-tag {
+    color: #d1d5db;
+    background: #262626;
   }
 
   .post-title {
@@ -333,9 +358,36 @@ const formatDate = (date: Date) => {
             }
           });
         },
-        { threshold: 0.2 }
+        { threshold: 0.2 },
       );
       observer.observe(header);
     }
   }
+
+  // Filter blog posts by language
+  function filterPostsByLang() {
+    const currentLang =
+      localStorage.getItem("lang") ||
+      document.documentElement.getAttribute("data-lang") ||
+      "en";
+    const posts = document.querySelectorAll<HTMLElement>(
+      ".post-card[data-lang]",
+    );
+    let visibleIndex = 0;
+
+    posts.forEach((post) => {
+      const postLang = post.getAttribute("data-lang");
+      if (postLang === currentLang) {
+        post.style.display = "";
+        post.style.setProperty("--i", visibleIndex.toString());
+        visibleIndex++;
+      } else {
+        post.style.display = "none";
+      }
+    });
+  }
+
+  filterPostsByLang();
+
+  window.addEventListener("langchange", filterPostsByLang);
 </script>

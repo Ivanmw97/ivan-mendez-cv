@@ -6,23 +6,55 @@ import CVHeader from "../components/CVHeader.astro";
 import Skills from "../components/Skills.astro";
 import Experience from "../components/Experience.astro";
 import Projects from "../components/Projects.astro";
-import { useTranslations } from "../i18n/utils";
+import { translations } from "../i18n/translations";
 
-const t = useTranslations();
+const en = translations.en;
+const es = translations.es;
 ---
 
-<Layout title={`${t.personalInfo.name} - ${t.personalInfo.title}`}>
+<Layout title={`${en.personalInfo.name} - ${en.personalInfo.title}`}>
   <Header />
-  <CVHeader {...t.personalInfo} />
-  <div class="cv-section-animated">
-    <Experience experiences={t.experiences} />
+
+  <!-- English CV -->
+  <div class="cv-content" data-lang="en">
+    <CVHeader {...en.personalInfo} downloadText={en.sectionTitles.downloadCV} />
+    <div class="cv-section-animated">
+      <Experience
+        experiences={en.experiences}
+        sectionTitle={en.sectionTitles.experience}
+      />
+    </div>
+    <div class="cv-section-animated">
+      <Skills skills={en.skills} sectionTitle={en.sectionTitles.skills} />
+    </div>
+    <div class="cv-section-animated">
+      <Projects
+        projects={en.projects}
+        sectionTitle={en.sectionTitles.projects}
+      />
+    </div>
   </div>
-  <div class="cv-section-animated">
-    <Skills skills={t.skills} />
+
+  <!-- Spanish CV -->
+  <div class="cv-content" data-lang="es" style="display: none;">
+    <CVHeader {...es.personalInfo} downloadText={es.sectionTitles.downloadCV} />
+    <div class="cv-section-animated">
+      <Experience
+        experiences={es.experiences}
+        sectionTitle={es.sectionTitles.experience}
+      />
+    </div>
+    <div class="cv-section-animated">
+      <Skills skills={es.skills} sectionTitle={es.sectionTitles.skills} />
+    </div>
+    <div class="cv-section-animated">
+      <Projects
+        projects={es.projects}
+        sectionTitle={es.sectionTitles.projects}
+      />
+    </div>
   </div>
-  <div class="cv-section-animated">
-    <Projects projects={t.projects} />
-  </div>
+
   <Footer />
 </Layout>
 
@@ -75,4 +107,39 @@ const t = useTranslations();
       });
     }
   }
+
+  // Filter CV content by language
+  function filterCVByLang() {
+    const currentLang =
+      localStorage.getItem("lang") ||
+      document.documentElement.getAttribute("data-lang") ||
+      "en";
+    const cvContents = document.querySelectorAll<HTMLElement>(
+      ".cv-content[data-lang]",
+    );
+
+    cvContents.forEach((content) => {
+      const lang = content.getAttribute("data-lang");
+      if (lang === currentLang) {
+        content.style.display = "";
+        // Trigger animations for the visible CV header
+        const cvHeader = content.querySelector(".cv-header");
+        if (cvHeader) {
+          cvHeader.classList.add("in-view");
+        }
+        // Trigger animations for CV sections
+        content.querySelectorAll(".cv-section-animated").forEach((section) => {
+          section.classList.add("in-view");
+        });
+      } else {
+        content.style.display = "none";
+      }
+    });
+  }
+
+  // Apply immediately
+  filterCVByLang();
+
+  // Listen for language changes
+  window.addEventListener("langchange", filterCVByLang);
 </script>

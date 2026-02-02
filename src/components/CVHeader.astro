@@ -3,9 +3,10 @@ interface Props {
   name: string;
   title: string;
   summary: string;
+  downloadText?: string;
 }
 
-const { name, title, summary } = Astro.props;
+const { name, title, summary, downloadText = "Download CV" } = Astro.props;
 ---
 
 <section class="cv-header">
@@ -31,7 +32,7 @@ const { name, title, summary } = Astro.props;
           <polyline points="7 10 12 15 17 10"></polyline>
           <line x1="12" y1="15" x2="12" y2="3"></line>
         </svg>
-        Download CV
+        {downloadText}
       </button>
     </div>
   </div>
@@ -42,6 +43,10 @@ const { name, title, summary } = Astro.props;
     padding: 4rem 2rem;
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-gray-200);
+  }
+  :global([data-theme="dark"]) .cv-header {
+    background-color: #0a0a0a;
+    border-bottom-color: #262626;
   }
 
   .cv-header-container {
@@ -59,11 +64,17 @@ const { name, title, summary } = Astro.props;
     color: var(--color-black);
     margin-bottom: 0.5rem;
   }
+  :global([data-theme="dark"]) .cv-name {
+    color: #ffffff;
+  }
 
   .cv-title {
     font-size: 1.25rem;
     color: var(--color-gray-600);
     margin-bottom: 1.5rem;
+  }
+  :global([data-theme="dark"]) .cv-title {
+    color: #a3a3a3;
   }
 
   .cv-summary {
@@ -71,6 +82,9 @@ const { name, title, summary } = Astro.props;
     line-height: 1.7;
     color: var(--color-gray-700);
     margin-bottom: 2rem;
+  }
+  :global([data-theme="dark"]) .cv-summary {
+    color: #d4d4d4;
   }
 
   .download-button {
@@ -87,6 +101,10 @@ const { name, title, summary } = Astro.props;
     font-size: inherit;
     cursor: pointer;
     transition: all var(--transition-base);
+  }
+  :global([data-theme="dark"]) .download-button {
+    background-color: #ffffff;
+    color: #0a0a0a;
   }
 
   .download-button:hover {

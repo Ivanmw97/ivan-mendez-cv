@@ -55,7 +55,108 @@ const {
         if (saved === "dark" || (!saved && prefersDark)) {
           document.documentElement.setAttribute("data-theme", "dark");
         }
+        // Set initial language
+        const savedLang = localStorage.getItem("lang") || "en";
+        document.documentElement.setAttribute("data-lang", savedLang);
       })();
+
+      // Translation data
+      window.i18n = {
+        en: {
+          "nav.home": "Home",
+          "nav.blog": "Blog",
+          "nav.projects": "Projects",
+          "nav.cv": "CV",
+          "nav.contact": "Contact",
+          "home.heroTitle":
+            "Building digital experiences with precision and purpose.",
+          "home.heroSubtitle":
+            "A software developer and digital creator crafting elegant and efficient solutions.",
+          "home.viewCV": "View My CV",
+          "home.viewProjects": "View Projects",
+          "projects.pageTitle": "Projects",
+          "projects.description":
+            "Selected works and experiments in web and mobile development, showcasing my passion for creating elegant and effective digital solutions.",
+          "contact.pageTitle": "Get in Touch",
+          "contact.description":
+            "Have a project in mind or just want to say hello? I'd love to hear from you.",
+          "contact.nameLabel": "Name",
+          "contact.namePlaceholder": "Your name",
+          "contact.emailLabel": "Email",
+          "contact.emailPlaceholder": "your@email.com",
+          "contact.messageLabel": "Message",
+          "contact.messagePlaceholder": "Your message...",
+          "contact.send": "Send Message",
+          "blog.pageTitle": "Blog",
+          "blog.description":
+            "Thoughts, tutorials, and insights on software development.",
+          "footer.rights": "All rights reserved.",
+        },
+        es: {
+          "nav.home": "Inicio",
+          "nav.blog": "Blog",
+          "nav.projects": "Proyectos",
+          "nav.cv": "CV",
+          "nav.contact": "Contacto",
+          "home.heroTitle":
+            "Creando experiencias digitales con precisión y propósito.",
+          "home.heroSubtitle":
+            "Un desarrollador de software y creador digital que diseña soluciones elegantes y eficientes.",
+          "home.viewCV": "Ver Mi CV",
+          "home.viewProjects": "Ver Proyectos",
+          "projects.pageTitle": "Proyectos",
+          "projects.description":
+            "Trabajos seleccionados y experimentos en desarrollo web y móvil, mostrando mi pasión por crear soluciones digitales elegantes y efectivas.",
+          "contact.pageTitle": "Contacta Conmigo",
+          "contact.description":
+            "¿Tienes un proyecto en mente o simplemente quieres saludar? Me encantaría saber de ti.",
+          "contact.nameLabel": "Nombre",
+          "contact.namePlaceholder": "Tu nombre",
+          "contact.emailLabel": "Email",
+          "contact.emailPlaceholder": "tu@email.com",
+          "contact.messageLabel": "Mensaje",
+          "contact.messagePlaceholder": "Tu mensaje...",
+          "contact.send": "Enviar Mensaje",
+          "blog.pageTitle": "Blog",
+          "blog.description":
+            "Pensamientos, tutoriales e ideas sobre desarrollo de software.",
+          "footer.rights": "Todos los derechos reservados.",
+        },
+      };
+
+      // Translation function
+      window.t = function (key) {
+        const lang = document.documentElement.getAttribute("data-lang") || "en";
+        return window.i18n[lang]?.[key] || window.i18n.en[key] || key;
+      };
+
+      // Apply translations to elements with data-i18n attribute
+      window.applyTranslations = function () {
+        document.querySelectorAll("[data-i18n]").forEach((el) => {
+          const key = el.getAttribute("data-i18n");
+          if (key) {
+            el.textContent = window.t(key);
+          }
+        });
+        document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+          const key = el.getAttribute("data-i18n-placeholder");
+          if (key) {
+            el.placeholder = window.t(key);
+          }
+        });
+      };
+
+      // Listen for language changes
+      window.addEventListener("langchange", () => {
+        window.applyTranslations();
+      });
+
+      // Apply on DOM ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", window.applyTranslations);
+      } else {
+        window.applyTranslations();
+      }
     </script>
     <slot />
   </body>

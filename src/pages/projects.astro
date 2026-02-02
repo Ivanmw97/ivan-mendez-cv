@@ -5,63 +5,122 @@ import Footer from "../components/Footer.astro";
 import ProjectShowcase from "../components/ProjectShowcase.astro";
 import { getProjectImage } from "../constants/images";
 
-const projects = [
-  {
-    label: "MOBILE APP",
-    title: "DelYo - Padel Match Tracker",
-    description:
-      "Track your padel journey with simplicity and privacy. A cross-platform Flutter app supporting 6 languages, offline-first architecture, and clean Material Design interface for recording matches, managing players, and viewing statistics.",
-    techStack: ["Flutter", "Dart", "Hive", "Provider"],
-    ctaText: "View Project",
-    ctaLink: "https://github.com/Ivanmw97/DelYo",
-    imageUrl: getProjectImage("delyo"),
-    imageAlt: "DelYo Padel Match Tracker Mobile App",
-  },
-  {
-    label: "CROSS-PLATFORM TOOLKIT",
-    title: "KompKit",
-    description:
-      "A lightweight cross-platform utility kit providing essential functions for Web (TypeScript), Android (Kotlin), and Flutter (Dart) development. Built as a monorepo with identical APIs across platforms, featuring debounce, email validation, and currency formatting utilities.",
-    techStack: ["TypeScript", "Kotlin", "Dart", "Monorepo"],
-    ctaText: "View Project",
-    ctaLink: "https://github.com/Kompkit/KompKit",
-    imageUrl: getProjectImage("kompkit"),
-    imageAlt: "KompKit Cross-Platform Utility Toolkit",
-  },
-  {
-    label: "WEB APPLICATION",
-    title: "Financial Manager",
-    description:
-      "A modern web application to track your personal finances, monitor spending, and stay on top of your budget. Built with Vue 3, TypeScript, and Vite for speed, simplicity, and scalability. Features dashboard with real-time overview, budget management, and visual charts with Supabase integration.",
-    techStack: ["Vue 3", "TypeScript", "Vite", "Pinia", "Supabase"],
-    ctaText: "View Live Demo",
-    ctaLink: "https://ivanmw97.github.io/financial-manager",
-    imageUrl: getProjectImage("financialManager"),
-    imageAlt: "Financial Manager Web Application Dashboard",
-  },
-  {
-    label: "MOBILE APPLICATION",
-    title: "CryptoTracker",
-    description:
-      "A mobile application developed in Kotlin for real-time cryptocurrency tracking. Features live price monitoring, detailed cryptocurrency information with interactive charts, search functionality, favorites management, and dynamic themes. Built with MVVM architecture, Jetpack Compose, and modern Android development practices.",
-    techStack: ["Kotlin", "Jetpack Compose", "Ktor", "Room", "Koin"],
-    ctaText: "View Project",
-    ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
-    imageUrl: getProjectImage("cryptotracker"),
-    imageAlt: "CryptoTracker Mobile Application Banner",
-  },
-  {
-    label: "LANDING PAGE",
-    title: "NovaFlow",
-    description:
-      "AI-Powered Task Management platform designed by Modulum Studio. A sleek and modern concept showcasing design and development capabilities with cutting-edge technologies. Features clean minimalist design, seamless internationalization (English/Spanish), dark mode support, and responsive layouts that prioritize both aesthetics and functionality.",
-    techStack: ["Astro", "TypeScript", "TailwindCSS"],
-    ctaText: "View Live Demo",
-    ctaLink: "https://modulum-studio.github.io/nova-flow/",
-    imageUrl: getProjectImage("novaflow"),
-    imageAlt: "NovaFlow AI Task Management Landing Page",
-  },
-];
+const projectsData = {
+  en: [
+    {
+      label: "MOBILE APP",
+      title: "DelYo - Padel Match Tracker",
+      description:
+        "Track your padel journey with simplicity and privacy. A cross-platform Flutter app supporting 6 languages, offline-first architecture, and clean Material Design interface for recording matches, managing players, and viewing statistics.",
+      techStack: ["Flutter", "Dart", "Hive", "Provider"],
+      ctaText: "View Project",
+      ctaLink: "https://github.com/Ivanmw97/DelYo",
+      imageUrl: getProjectImage("delyo"),
+      imageAlt: "DelYo Padel Match Tracker Mobile App",
+    },
+    {
+      label: "CROSS-PLATFORM TOOLKIT",
+      title: "KompKit",
+      description:
+        "A lightweight cross-platform utility kit providing essential functions for Web (TypeScript), Android (Kotlin), and Flutter (Dart) development. Built as a monorepo with identical APIs across platforms, featuring debounce, email validation, and currency formatting utilities.",
+      techStack: ["TypeScript", "Kotlin", "Dart", "Monorepo"],
+      ctaText: "View Project",
+      ctaLink: "https://github.com/Kompkit/KompKit",
+      imageUrl: getProjectImage("kompkit"),
+      imageAlt: "KompKit Cross-Platform Utility Toolkit",
+    },
+    {
+      label: "WEB APPLICATION",
+      title: "Financial Manager",
+      description:
+        "A modern web application to track your personal finances, monitor spending, and stay on top of your budget. Built with Vue 3, TypeScript, and Vite for speed, simplicity, and scalability. Features dashboard with real-time overview, budget management, and visual charts with Supabase integration.",
+      techStack: ["Vue 3", "TypeScript", "Vite", "Pinia", "Supabase"],
+      ctaText: "View Live Demo",
+      ctaLink: "https://ivanmw97.github.io/financial-manager",
+      imageUrl: getProjectImage("financialManager"),
+      imageAlt: "Financial Manager Web Application Dashboard",
+    },
+    {
+      label: "MOBILE APPLICATION",
+      title: "CryptoTracker",
+      description:
+        "A mobile application developed in Kotlin for real-time cryptocurrency tracking. Features live price monitoring, detailed cryptocurrency information with interactive charts, search functionality, favorites management, and dynamic themes. Built with MVVM architecture, Jetpack Compose, and modern Android development practices.",
+      techStack: ["Kotlin", "Jetpack Compose", "Ktor", "Room", "Koin"],
+      ctaText: "View Project",
+      ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
+      imageUrl: getProjectImage("cryptotracker"),
+      imageAlt: "CryptoTracker Mobile Application Banner",
+    },
+    {
+      label: "LANDING PAGE",
+      title: "NovaFlow",
+      description:
+        "AI-Powered Task Management platform designed by Modulum Studio. A sleek and modern concept showcasing design and development capabilities with cutting-edge technologies. Features clean minimalist design, seamless internationalization (English/Spanish), dark mode support, and responsive layouts that prioritize both aesthetics and functionality.",
+      techStack: ["Astro", "TypeScript", "TailwindCSS"],
+      ctaText: "View Live Demo",
+      ctaLink: "https://modulum-studio.github.io/nova-flow/",
+      imageUrl: getProjectImage("novaflow"),
+      imageAlt: "NovaFlow AI Task Management Landing Page",
+    },
+  ],
+  es: [
+    {
+      label: "APP MÓVIL",
+      title: "DelYo - Seguimiento de Partidos de Pádel",
+      description:
+        "Registra tu trayectoria en pádel con simplicidad y privacidad. Una app Flutter multiplataforma con soporte para 6 idiomas, arquitectura offline-first e interfaz Material Design limpia para registrar partidos, gestionar jugadores y ver estadísticas.",
+      techStack: ["Flutter", "Dart", "Hive", "Provider"],
+      ctaText: "Ver Proyecto",
+      ctaLink: "https://github.com/Ivanmw97/DelYo",
+      imageUrl: getProjectImage("delyo"),
+      imageAlt: "DelYo App Móvil de Seguimiento de Pádel",
+    },
+    {
+      label: "KIT MULTIPLATAFORMA",
+      title: "KompKit",
+      description:
+        "Un kit de utilidades multiplataforma ligero que proporciona funciones esenciales para desarrollo Web (TypeScript), Android (Kotlin) y Flutter (Dart). Construido como monorepo con APIs idénticas entre plataformas, incluyendo debounce, validación de email y formateo de moneda.",
+      techStack: ["TypeScript", "Kotlin", "Dart", "Monorepo"],
+      ctaText: "Ver Proyecto",
+      ctaLink: "https://github.com/Kompkit/KompKit",
+      imageUrl: getProjectImage("kompkit"),
+      imageAlt: "KompKit Kit de Utilidades Multiplataforma",
+    },
+    {
+      label: "APLICACIÓN WEB",
+      title: "Financial Manager",
+      description:
+        "Una aplicación web moderna para gestionar tus finanzas personales, monitorear gastos y controlar tu presupuesto. Construida con Vue 3, TypeScript y Vite para velocidad, simplicidad y escalabilidad. Incluye dashboard con vista en tiempo real, gestión de presupuestos y gráficos visuales con integración de Supabase.",
+      techStack: ["Vue 3", "TypeScript", "Vite", "Pinia", "Supabase"],
+      ctaText: "Ver Demo",
+      ctaLink: "https://ivanmw97.github.io/financial-manager",
+      imageUrl: getProjectImage("financialManager"),
+      imageAlt: "Dashboard de Financial Manager",
+    },
+    {
+      label: "APLICACIÓN MÓVIL",
+      title: "CryptoTracker",
+      description:
+        "Una aplicación móvil desarrollada en Kotlin para seguimiento de criptomonedas en tiempo real. Incluye monitoreo de precios en vivo, información detallada con gráficos interactivos, funcionalidad de búsqueda, gestión de favoritos y temas dinámicos. Construida con arquitectura MVVM, Jetpack Compose y prácticas modernas de desarrollo Android.",
+      techStack: ["Kotlin", "Jetpack Compose", "Ktor", "Room", "Koin"],
+      ctaText: "Ver Proyecto",
+      ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
+      imageUrl: getProjectImage("cryptotracker"),
+      imageAlt: "Banner de CryptoTracker Aplicación Móvil",
+    },
+    {
+      label: "LANDING PAGE",
+      title: "NovaFlow",
+      description:
+        "Plataforma de Gestión de Tareas con IA diseñada por Modulum Studio. Un concepto elegante y moderno que muestra capacidades de diseño y desarrollo con tecnologías de vanguardia. Incluye diseño minimalista, internacionalización (Inglés/Español), modo oscuro y layouts responsivos que priorizan estética y funcionalidad.",
+      techStack: ["Astro", "TypeScript", "TailwindCSS"],
+      ctaText: "Ver Demo",
+      ctaLink: "https://modulum-studio.github.io/nova-flow/",
+      imageUrl: getProjectImage("novaflow"),
+      imageAlt: "NovaFlow Landing Page de Gestión de Tareas con IA",
+    },
+  ],
+};
 
 ---
 
@@ -74,17 +133,34 @@ const projects = [
   <main class="projects-page">
     <div class="projects-container">
       <header class="projects-header">
-        <h1 class="projects-title">Projects</h1>
-        <p class="projects-description">
+        <h1 class="projects-title" data-i18n="projects.pageTitle">Projects</h1>
+        <p class="projects-description" data-i18n="projects.description">
           Selected works and experiments in web and mobile development,
           showcasing my passion for creating elegant and effective digital
           solutions.
         </p>
       </header>
 
-      <div class="projects-showcase">
+      <div class="projects-showcase" data-lang="en">
         {
-          projects.map((project, index) => (
+          projectsData.en.map((project, index) => (
+            <ProjectShowcase
+              label={project.label}
+              title={project.title}
+              description={project.description}
+              techStack={project.techStack}
+              ctaText={project.ctaText}
+              ctaLink={project.ctaLink}
+              imageUrl={project.imageUrl}
+              imageAlt={project.imageAlt}
+              reversed={index % 2 === 1}
+            />
+          ))
+        }
+      </div>
+      <div class="projects-showcase" data-lang="es" style="display: none;">
+        {
+          projectsData.es.map((project, index) => (
             <ProjectShowcase
               label={project.label}
               title={project.title}
@@ -240,4 +316,25 @@ const projects = [
       });
     }
   }
+
+  // Filter projects by language
+  function filterProjectsByLang() {
+    const currentLang = localStorage.getItem("lang") || document.documentElement.getAttribute("data-lang") || "en";
+    const showcases = document.querySelectorAll<HTMLElement>(".projects-showcase[data-lang]");
+    
+    showcases.forEach((showcase) => {
+      const lang = showcase.getAttribute("data-lang");
+      if (lang === currentLang) {
+        showcase.style.display = "";
+      } else {
+        showcase.style.display = "none";
+      }
+    });
+  }
+
+  // Apply on page load
+  filterProjectsByLang();
+
+  // Listen for language changes
+  window.addEventListener("langchange", filterProjectsByLang);
 </script>

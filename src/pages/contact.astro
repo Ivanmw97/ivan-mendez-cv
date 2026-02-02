@@ -13,11 +13,12 @@ import Footer from "../components/Footer.astro";
   <main class="contact-page">
     <div class="contact-container">
       <header class="contact-header">
-        <h1 class="contact-title">Get in Touch</h1>
-        <p class="contact-subtitle">
-          Feel free to reach out for collaborations or just a friendly<br
-          />hello! Fill out the form below and I'll get back to you as<br />soon
-          as possible.
+        <h1 class="contact-title" data-i18n="contact.pageTitle">
+          Get in Touch
+        </h1>
+        <p class="contact-subtitle" data-i18n="contact.description">
+          Have a project in mind or just want to say hello? I'd love to hear
+          from you.
         </p>
       </header>
 
@@ -36,7 +37,9 @@ import Footer from "../components/Footer.astro";
         <input type="hidden" name="_startedAt" id="startedAt" />
 
         <div class="form-group">
-          <label for="name" class="form-label">Name</label>
+          <label for="name" class="form-label" data-i18n="contact.nameLabel"
+            >Name</label
+          >
           <input
             type="text"
             id="name"
@@ -44,24 +47,32 @@ import Footer from "../components/Footer.astro";
             required
             minlength="2"
             class="form-input"
-            placeholder="Enter your name"
+            placeholder="Your name"
+            data-i18n-placeholder="contact.namePlaceholder"
           />
         </div>
 
         <div class="form-group">
-          <label for="email" class="form-label">Email</label>
+          <label for="email" class="form-label" data-i18n="contact.emailLabel"
+            >Email</label
+          >
           <input
             type="email"
             id="email"
             name="email"
             required
             class="form-input"
-            placeholder="Enter your email address"
+            placeholder="your@email.com"
+            data-i18n-placeholder="contact.emailPlaceholder"
           />
         </div>
 
         <div class="form-group">
-          <label for="message" class="form-label">Message</label>
+          <label
+            for="message"
+            class="form-label"
+            data-i18n="contact.messageLabel">Message</label
+          >
           <textarea
             id="message"
             name="message"
@@ -70,11 +81,12 @@ import Footer from "../components/Footer.astro";
             minlength="10"
             maxlength="5000"
             class="form-input"
-            placeholder="Your message here..."></textarea>
+            placeholder="Your message..."
+            data-i18n-placeholder="contact.messagePlaceholder"></textarea>
         </div>
 
         <button type="submit" class="submit-button" id="submit-btn">
-          <span class="btn-text">Send Message</span>
+          <span class="btn-text" data-i18n="contact.send">Send Message</span>
           <span class="btn-loading hidden">Sending...</span>
         </button>
       </form>

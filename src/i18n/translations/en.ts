@@ -30,6 +30,12 @@ export default {
     linkedin: "https://www.linkedin.com/in/ivanmw97/",
     github: "https://github.com/Ivanmw97"
   },
+  sectionTitles: {
+    experience: "Work Experience",
+    skills: "Skills",
+    projects: "Projects",
+    downloadCV: "Download CV"
+  },
   skills: [
     {
       category: "Mobile Development",

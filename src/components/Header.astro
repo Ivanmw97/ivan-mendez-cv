@@ -18,296 +18,385 @@
 
     <!-- Nav -->
     <nav id="site-nav" class="nav" role="navigation" aria-label="Primary">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/blog" class="nav-link">Blog</a>
-      <a href="/projects" class="nav-link">Projects</a>
-      <a href="/cv" class="nav-link">CV</a>
-      <a href="/contact" class="nav-link nav-cta">Contact</a>
-
-      <!-- Theme Toggle -->
-      <button
-        class="theme-toggle"
-        aria-label="Toggle dark mode"
-        title="Toggle theme"
+      <a href="/" class="nav-link" data-i18n="nav.home">Home</a>
+      <a href="/blog" class="nav-link" data-i18n="nav.blog">Blog</a>
+      <a href="/projects" class="nav-link" data-i18n="nav.projects">Projects</a>
+      <a href="/cv" class="nav-link" data-i18n="nav.cv">CV</a>
+      <a href="/contact" class="nav-link nav-cta" data-i18n="nav.contact"
+        >Contact</a
       >
-        <svg
-          class="icon-sun"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+
+      <!-- Toggles Container -->
+      <div class="header-toggles">
+        <!-- Language Toggle -->
+        <button
+          class="lang-toggle"
+          aria-label="Change language"
+          title="Change language"
         >
-          <circle cx="12" cy="12" r="5"></circle>
-          <line x1="12" y1="1" x2="12" y2="3"></line>
-          <line x1="12" y1="21" x2="12" y2="23"></line>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-          <line x1="1" y1="12" x2="3" y2="12"></line>
-          <line x1="21" y1="12" x2="23" y2="12"></line>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <svg
-          class="icon-moon"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          <span class="lang-current">EN</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button
+          class="theme-toggle"
+          aria-label="Toggle dark mode"
+          title="Toggle theme"
         >
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-      </button>
+          <svg
+            class="icon-sun"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg
+            class="icon-moon"
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
     </nav>
   </div>
-</header>
 
-<style>
-  .sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-  }
-
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: saturate(180%) blur(20px);
-    border-bottom: 1px solid var(--color-gray-200);
-  }
-  :global([data-theme="dark"]) .header {
-    background: rgba(10, 10, 10, 0.85);
-    border-bottom-color: #262626;
-  }
-  .header-container {
-    max-width: var(--max-width-content);
-    margin: 0 auto;
-    padding: 0 2rem;
-    height: 4.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-  .logo {
-    font-size: 1.125rem;
-    font-weight: var(--font-weight-semibold);
-    color: var(--color-black);
-    letter-spacing: -0.022em;
-    text-decoration: none;
-  }
-
-  /* Mobile toggle hidden on desktop */
-  .menu-toggle {
-    display: none;
-    border: 0;
-    background: transparent;
-    color: var(--color-gray-700, #444);
-    padding: 0.375rem;
-    border-radius: 0.5rem;
-  }
-  .menu-toggle:hover {
-    color: var(--color-black);
-  }
-  .menu-toggle:focus-visible {
-    outline: 2px solid var(--color-black);
-    outline-offset: 2px;
-  }
-
-  .nav {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-  .nav-link {
-    position: relative;
-    font-size: 0.9375rem;
-    font-weight: var(--font-weight-normal);
-    color: var(--color-gray-700, #444);
-    text-decoration: none;
-    transition: color var(--transition-fast, 160ms);
-    /* underline animation */
-    background-image: linear-gradient(currentColor, currentColor);
-    background-position: 0 100%;
-    background-repeat: no-repeat;
-    background-size: 0% 1px;
-    transition:
-      color 160ms,
-      background-size 160ms ease;
-    padding-block: 0.25rem;
-  }
-  .nav-link:hover,
-  .nav-link:focus-visible {
-    color: var(--color-black);
-    background-size: 100% 1px;
-    outline: none;
-  }
-  /* active state */
-  .nav-link.is-active {
-    color: var(--color-black);
-    background-size: 100% 1px;
-  }
-
-  /* ghost button for Contact on desktop */
-  .nav-cta {
-    border: 1px solid var(--color-gray-300, #ddd);
-    border-radius: 0.75rem;
-    padding: 0.5rem 0.9rem;
-    background-image: none;
-  }
-  .nav-cta:hover,
-  .nav-cta:focus-visible {
-    border-color: var(--color-black);
-    background: var(--color-black);
-    color: var(--color-white);
-  }
-
-  /* Theme toggle button */
-  .theme-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--color-gray-200);
-    border-radius: 0.5rem;
-    background: transparent;
-    color: var(--color-gray-600);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    margin-left: 0.5rem;
-  }
-  .theme-toggle:hover {
-    border-color: var(--color-gray-400);
-    color: var(--color-black);
-  }
-  .theme-toggle:focus-visible {
-    outline: 2px solid var(--color-black);
-    outline-offset: 2px;
-  }
-
-  /* Icon visibility */
-  .theme-toggle .icon-moon {
-    display: none;
-  }
-  :global([data-theme="dark"]) .theme-toggle .icon-sun {
-    display: none;
-  }
-  :global([data-theme="dark"]) .theme-toggle .icon-moon {
-    display: block;
-  }
-
-  /* Responsive */
-  @media (max-width: 768px) {
-    .header-container {
-      padding: 0 1rem;
-      height: 4rem;
-    }
-    .menu-toggle {
-      display: inline-flex;
-    }
-    .nav {
+  <style>
+    .sr-only {
       position: absolute;
-      inset: 4rem 0 auto 0; /* below header */
-      display: none;
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--color-gray-200);
-      padding: 0.5rem 1rem 1rem;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
-    :global([data-theme="dark"]) .nav {
-      background: rgba(10, 10, 10, 0.95);
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--color-gray-200);
+    }
+    :global([data-theme="dark"]) .header {
+      background: rgba(10, 10, 10, 0.85);
       border-bottom-color: #262626;
     }
-    .nav.open {
+    .header-container {
+      max-width: var(--max-width-content);
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 4.5rem;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
     }
+    .logo {
+      font-size: 1.125rem;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-black);
+      letter-spacing: -0.022em;
+      text-decoration: none;
+    }
+
+    /* Mobile toggle hidden on desktop */
+    .menu-toggle {
+      display: none;
+      border: 0;
+      background: transparent;
+      color: var(--color-gray-700, #444);
+      padding: 0.375rem;
+      border-radius: 0.5rem;
+    }
+    .menu-toggle:hover {
+      color: var(--color-black);
+    }
+    .menu-toggle:focus-visible {
+      outline: 2px solid var(--color-black);
+      outline-offset: 2px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .header-toggles {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-left: auto;
+      padding-left: 1.5rem;
+    }
+
     .nav-link {
-      padding: 0.9rem 0.25rem;
-      background-size: 0 0;
+      position: relative;
+      font-size: 0.9375rem;
+      font-weight: var(--font-weight-normal);
+      color: var(--color-gray-700, #444);
+      text-decoration: none;
+      transition: color var(--transition-fast, 160ms);
+      /* underline animation */
+      background-image: linear-gradient(currentColor, currentColor);
+      background-position: 0 100%;
+      background-repeat: no-repeat;
+      background-size: 0% 1px;
+      transition:
+        color 160ms,
+        background-size 160ms ease;
+      padding-block: 0.25rem;
     }
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color: var(--color-black);
+      background-size: 100% 1px;
+      outline: none;
+    }
+    /* active state */
+    .nav-link.is-active {
+      color: var(--color-black);
+      background-size: 100% 1px;
+    }
+
+    /* ghost button for Contact on desktop */
     .nav-cta {
-      border-radius: 0.6rem;
+      border: 1px solid var(--color-gray-300, #ddd);
+      border-radius: 0.75rem;
+      padding: 0.5rem 0.9rem;
+      background-image: none;
     }
+    .nav-cta:hover,
+    .nav-cta:focus-visible {
+      border-color: var(--color-black);
+      background: var(--color-black);
+      color: var(--color-white);
+    }
+
+    /* Theme toggle button */
     .theme-toggle {
-      margin-left: 0;
-      margin-top: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid var(--color-gray-200);
+      border-radius: 0.5rem;
+      background: transparent;
+      color: var(--color-gray-600);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      margin-left: 0.5rem;
     }
-  }
-</style>
+    .theme-toggle:hover {
+      border-color: var(--color-gray-400);
+      color: var(--color-black);
+    }
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--color-black);
+      outline-offset: 2px;
+    }
 
-<script>
-  // Active link based on current path
-  (function () {
-    const path = location.pathname.replace(/\/+$/, "") || "/";
-    document.querySelectorAll(".nav-link").forEach((a) => {
-      const href = a.getAttribute("href");
-      if (!href) return;
+    /* Icon visibility */
+    .theme-toggle .icon-moon {
+      display: none;
+    }
+    :global([data-theme="dark"]) .theme-toggle .icon-sun {
+      display: none;
+    }
+    :global([data-theme="dark"]) .theme-toggle .icon-moon {
+      display: block;
+    }
 
-      const normalized = href === "/" ? "/" : href.replace(/\/+$/, "");
-      if (normalized === "/" ? path === "/" : path.startsWith(normalized)) {
-        a.classList.add("is-active");
-        a.setAttribute("aria-current", "page");
+    /* Language toggle */
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 36px;
+      padding: 0 0.75rem;
+      border: 1px solid var(--color-gray-200);
+      border-radius: 0.5rem;
+      background: transparent;
+      color: var(--color-gray-600);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      font-size: 0.8125rem;
+      font-weight: var(--font-weight-medium);
+      letter-spacing: 0.02em;
+    }
+    .lang-toggle:hover {
+      border-color: var(--color-gray-400);
+      color: var(--color-black);
+    }
+    .lang-toggle:focus-visible {
+      outline: 2px solid var(--color-black);
+      outline-offset: 2px;
+    }
+    .lang-current {
+      text-transform: uppercase;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-container {
+        padding: 0 1rem;
+        height: 4rem;
       }
-    });
+      .menu-toggle {
+        display: inline-flex;
+      }
+      .nav {
+        position: absolute;
+        inset: 4rem 0 auto 0; /* below header */
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--color-gray-200);
+        padding: 0.5rem 1rem 1rem;
+      }
+      :global([data-theme="dark"]) .nav {
+        background: rgba(10, 10, 10, 0.95);
+        border-bottom-color: #262626;
+      }
+      .nav.open {
+        display: flex;
+      }
+      .nav-link {
+        padding: 0.9rem 0.25rem;
+        background-size: 0 0;
+      }
+      .nav-cta {
+        border-radius: 0.6rem;
+      }
+      .header-toggles {
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 0;
+        padding-left: 0;
+        margin-top: 0.5rem;
+      }
+      .theme-toggle {
+        margin-left: 0;
+        margin-top: 0;
+      }
+      .lang-toggle {
+        margin-top: 0;
+      }
+    }
+  </style>
 
-    // Mobile toggle
-    const btn = document.querySelector(".menu-toggle");
-    const nav = document.getElementById("site-nav");
-    if (btn && nav) {
-      btn.addEventListener("click", () => {
-        const open = nav.classList.toggle("open");
-        btn.setAttribute("aria-expanded", String(open));
+  <script>
+    // Active link based on current path
+    (function () {
+      const path = location.pathname.replace(/\/+$/, "") || "/";
+      document.querySelectorAll(".nav-link").forEach((a) => {
+        const href = a.getAttribute("href");
+        if (!href) return;
+
+        const normalized = href === "/" ? "/" : href.replace(/\/+$/, "");
+        if (normalized === "/" ? path === "/" : path.startsWith(normalized)) {
+          a.classList.add("is-active");
+          a.setAttribute("aria-current", "page");
+        }
       });
-      // close on link click
-      nav.querySelectorAll("a").forEach((a) =>
-        a.addEventListener("click", () => {
-          nav.classList.remove("open");
-          btn.setAttribute("aria-expanded", "false");
-        }),
-      );
-    }
 
-    // Theme toggle
-    const themeToggle = document.querySelector(".theme-toggle");
-    const html = document.documentElement;
+      // Mobile toggle
+      const btn = document.querySelector(".menu-toggle");
+      const nav = document.getElementById("site-nav");
+      if (btn && nav) {
+        btn.addEventListener("click", () => {
+          const open = nav.classList.toggle("open");
+          btn.setAttribute("aria-expanded", String(open));
+        });
+        // close on link click
+        nav.querySelectorAll("a").forEach((a) =>
+          a.addEventListener("click", () => {
+            nav.classList.remove("open");
+            btn.setAttribute("aria-expanded", "false");
+          }),
+        );
+      }
 
-    // Check for saved theme or system preference
-    const savedTheme = localStorage.getItem("theme");
-    const systemPrefersDark = window.matchMedia(
-      "(prefers-color-scheme: dark)",
-    ).matches;
+      // Theme toggle
+      const themeToggle = document.querySelector(".theme-toggle");
+      const html = document.documentElement;
 
-    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
-      html.setAttribute("data-theme", "dark");
-    }
+      // Check for saved theme or system preference
+      const savedTheme = localStorage.getItem("theme");
+      const systemPrefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
 
-    if (themeToggle) {
-      themeToggle.addEventListener("click", () => {
-        const isDark = html.getAttribute("data-theme") === "dark";
-        const newTheme = isDark ? "light" : "dark";
+      if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+        html.setAttribute("data-theme", "dark");
+      }
 
-        html.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-      });
-    }
-  })();
-</script>
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const isDark = html.getAttribute("data-theme") === "dark";
+          const newTheme = isDark ? "light" : "dark";
+
+          html.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+        });
+      }
+
+      // Language toggle
+      const langToggle = document.querySelector(".lang-toggle");
+      const langCurrent = document.querySelector(".lang-current");
+
+      // Get saved language or default to 'en'
+      const savedLang = localStorage.getItem("lang") || "en";
+      html.setAttribute("data-lang", savedLang);
+      if (langCurrent) {
+        langCurrent.textContent = savedLang.toUpperCase();
+      }
+
+      if (langToggle && langCurrent) {
+        langToggle.addEventListener("click", () => {
+          const currentLang = html.getAttribute("data-lang") || "en";
+          const newLang = currentLang === "en" ? "es" : "en";
+
+          html.setAttribute("data-lang", newLang);
+          localStorage.setItem("lang", newLang);
+          langCurrent.textContent = newLang.toUpperCase();
+
+          // Dispatch custom event for other components to react
+          window.dispatchEvent(
+            new CustomEvent("langchange", { detail: { lang: newLang } }),
+          );
+        });
+      }
+    })();
+  </script>
+</header>

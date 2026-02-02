@@ -9,34 +9,39 @@ interface Experience {
 
 interface Props {
   experiences: Experience[];
+  sectionTitle?: string;
 }
 
-const { experiences } = Astro.props;
+const { experiences, sectionTitle = "Work Experience" } = Astro.props;
 ---
 
 <section class="experience-section">
   <div class="experience-container">
     <h2 class="section-title">
-      Work Experience
+      {sectionTitle}
     </h2>
-    
+
     <div class="experience-list">
-      {experiences.map((experience) => (
-        <article class="experience-item">
-          <div class="experience-header">
-            <div class="experience-info">
-              <h3 class="experience-position">{experience.position}</h3>
-              <p class="experience-company">{experience.company} | {experience.period}</p>
+      {
+        experiences.map((experience) => (
+          <article class="experience-item">
+            <div class="experience-header">
+              <div class="experience-info">
+                <h3 class="experience-position">{experience.position}</h3>
+                <p class="experience-company">
+                  {experience.company} | {experience.period}
+                </p>
+              </div>
             </div>
-          </div>
-          
-          <ul class="experience-achievements">
-            {experience.achievements.map((achievement) => (
-              <li>{achievement}</li>
-            ))}
-          </ul>
-        </article>
-      ))}
+
+            <ul class="experience-achievements">
+              {experience.achievements.map((achievement) => (
+                <li>{achievement}</li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
     </div>
   </div>
 </section>
@@ -46,6 +51,10 @@ const { experiences } = Astro.props;
     padding: 4rem 2rem;
     background-color: var(--color-white);
     border-bottom: 1px solid var(--color-gray-200);
+  }
+  :global([data-theme="dark"]) .experience-section {
+    background-color: #0a0a0a;
+    border-bottom-color: #262626;
   }
 
   .experience-container {
@@ -59,6 +68,9 @@ const { experiences } = Astro.props;
     color: var(--color-black);
     margin-bottom: 2.5rem;
   }
+  :global([data-theme="dark"]) .section-title {
+    color: #ffffff;
+  }
 
   .experience-list {
     display: flex;
@@ -70,6 +82,9 @@ const { experiences } = Astro.props;
     border-left: 2px solid var(--color-gray-200);
     padding-left: 2rem;
   }
+  :global([data-theme="dark"]) .experience-item {
+    border-left-color: #404040;
+  }
 
   .experience-header {
     margin-bottom: 1rem;
@@ -80,6 +95,9 @@ const { experiences } = Astro.props;
     font-weight: var(--font-weight-semibold);
     color: var(--color-black);
     margin-bottom: 0.25rem;
+  }
+  :global([data-theme="dark"]) .experience-position {
+    color: #ffffff;
   }
 
   .experience-company {
@@ -103,9 +121,12 @@ const { experiences } = Astro.props;
     padding-left: 1.5rem;
     position: relative;
   }
+  :global([data-theme="dark"]) .experience-achievements li {
+    color: #d4d4d4;
+  }
 
   .experience-achievements li::before {
-    content: '•';
+    content: "•";
     position: absolute;
     left: 0;
     color: var(--color-gray-400);

@@ -6,28 +6,31 @@ interface Skill {
 
 interface Props {
   skills: Skill[];
+  sectionTitle?: string;
 }
 
-const { skills } = Astro.props;
+const { skills, sectionTitle = "Skills" } = Astro.props;
 ---
 
 <section class="skills-section">
   <div class="skills-container">
     <h2 class="section-title">
-      Skills
+      {sectionTitle}
     </h2>
-    
+
     <div class="skills-grid">
-      {skills.map((skillGroup) => (
-        <div class="skill-group">
-          <h3 class="skill-category">{skillGroup.category}</h3>
-          <div class="skill-tags">
-            {skillGroup.items.map((skill) => (
-              <span class="skill-tag">{skill}</span>
-            ))}
+      {
+        skills.map((skillGroup) => (
+          <div class="skill-group">
+            <h3 class="skill-category">{skillGroup.category}</h3>
+            <div class="skill-tags">
+              {skillGroup.items.map((skill) => (
+                <span class="skill-tag">{skill}</span>
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+      }
     </div>
   </div>
 </section>
@@ -37,6 +40,10 @@ const { skills } = Astro.props;
     padding: 4rem 2rem;
     background-color: var(--color-gray-50);
     border-bottom: 1px solid var(--color-gray-200);
+  }
+  :global([data-theme="dark"]) .skills-section {
+    background-color: #171717;
+    border-bottom-color: #262626;
   }
 
   .skills-container {
@@ -49,6 +56,9 @@ const { skills } = Astro.props;
     font-weight: var(--font-weight-bold);
     color: var(--color-black);
     margin-bottom: 2.5rem;
+  }
+  :global([data-theme="dark"]) .section-title {
+    color: #ffffff;
   }
 
   .skills-grid {
@@ -68,6 +78,9 @@ const { skills } = Astro.props;
     font-weight: var(--font-weight-semibold);
     color: var(--color-black);
   }
+  :global([data-theme="dark"]) .skill-category {
+    color: #ffffff;
+  }
 
   .skill-tags {
     display: flex;
@@ -84,6 +97,11 @@ const { skills } = Astro.props;
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-200);
     border-radius: 0.375rem;
+  }
+  :global([data-theme="dark"]) .skill-tag {
+    color: #d4d4d4;
+    background-color: #262626;
+    border-color: #404040;
   }
 
   @media (max-width: 768px) {

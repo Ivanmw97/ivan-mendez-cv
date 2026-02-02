@@ -4,11 +4,13 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  descriptionEs?: string;
 }
 
 const {
   title = "Ivan Mendez – Software Developer",
-  description = "Software developer and digital creator crafting elegant and efficient solutions.",
+  description = "Software developer crafting elegant mobile and web solutions.",
+  descriptionEs = "Desarrollador de software creando soluciones móviles y web elegantes.",
 } = Astro.props;
 ---
 
@@ -20,7 +22,12 @@ const {
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
-    <meta name="description" content={description} />
+    <meta
+      name="description"
+      content={description}
+      data-description-en={description}
+      data-description-es={descriptionEs}
+    />
     <meta name="author" content="Iván Méndez" />
 
     <!-- Favicon -->
@@ -149,13 +156,31 @@ const {
       // Listen for language changes
       window.addEventListener("langchange", () => {
         window.applyTranslations();
+        window.updateMetaDescription();
       });
+
+      // Update meta description based on language
+      window.updateMetaDescription = function () {
+        const lang = document.documentElement.getAttribute("data-lang") || "en";
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+          const desc =
+            lang === "es"
+              ? metaDesc.getAttribute("data-description-es")
+              : metaDesc.getAttribute("data-description-en");
+          if (desc) metaDesc.setAttribute("content", desc);
+        }
+      };
 
       // Apply on DOM ready
       if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", window.applyTranslations);
+        document.addEventListener("DOMContentLoaded", () => {
+          window.applyTranslations();
+          window.updateMetaDescription();
+        });
       } else {
         window.applyTranslations();
+        window.updateMetaDescription();
       }
     </script>
     <slot />

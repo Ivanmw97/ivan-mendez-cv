@@ -45,6 +45,18 @@ const {
     />
   </head>
   <body>
+    <script is:inline>
+      // Prevent flash of wrong theme
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        if (saved === "dark" || (!saved && prefersDark)) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
     <slot />
   </body>
 </html>

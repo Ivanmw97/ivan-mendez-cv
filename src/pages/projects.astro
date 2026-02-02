@@ -110,6 +110,9 @@ const projects = [
     min-height: calc(100vh - 4.5rem);
     background-color: white;
   }
+  :global([data-theme="dark"]) .projects-page {
+    background-color: #0a0a0a;
+  }
 
   .projects-container {
     max-width: 100%;
@@ -131,6 +134,9 @@ const projects = [
     color: var(--color-black);
     margin: 0 0 1rem;
   }
+  :global([data-theme="dark"]) .projects-title {
+    color: #ffffff;
+  }
 
   .projects-description {
     font-size: 1.125rem;
@@ -138,6 +144,9 @@ const projects = [
     max-width: 42rem;
     margin: 0 auto;
     line-height: 1.6;
+  }
+  :global([data-theme="dark"]) .projects-description {
+    color: #a3a3a3;
   }
 
   .projects-showcase {

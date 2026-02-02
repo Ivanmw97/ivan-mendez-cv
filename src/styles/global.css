@@ -13,6 +13,14 @@
   --color-gray-800: #262626;
   --color-gray-900: #171717;
   
+  /* Theme colors (light mode default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --text-primary: #000000;
+  --text-secondary: #525252;
+  --border-color: #e5e5e5;
+  --header-bg: rgba(255, 255, 255, 0.8);
+  
   /* Typography */
   --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
   --font-weight-normal: 400;
@@ -89,4 +97,27 @@ button:focus-visible {
 /* Support for language-specific text */
 [lang="es"] {
   hyphens: auto;
+}
+
+/* Dark mode theme */
+[data-theme="dark"] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #171717;
+  --text-primary: #ffffff;
+  --text-secondary: #a3a3a3;
+  --border-color: #262626;
+  --header-bg: rgba(10, 10, 10, 0.8);
+  
+  --color-white: #0a0a0a;
+  --color-black: #ffffff;
+  --color-gray-50: #171717;
+  --color-gray-100: #1a1a1a;
+  --color-gray-200: #262626;
+  --color-gray-300: #404040;
+  --color-gray-400: #525252;
+  --color-gray-500: #737373;
+  --color-gray-600: #a3a3a3;
+  --color-gray-700: #d4d4d4;
+  --color-gray-800: #e5e5e5;
+  --color-gray-900: #f5f5f5;
 }

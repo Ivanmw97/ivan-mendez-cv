@@ -153,6 +153,9 @@ const {
     color: #6b7280;
     margin-bottom: 1rem;
   }
+  :global([data-theme="dark"]) .project-showcase__label {
+    color: #9ca3af;
+  }
 
   .project-showcase__title {
     font-size: 1.875rem;
@@ -160,6 +163,9 @@ const {
     color: #111827;
     margin-bottom: 1.5rem;
     line-height: 1.2;
+  }
+  :global([data-theme="dark"]) .project-showcase__title {
+    color: #ffffff;
   }
 
   @media (min-width: 768px) {
@@ -180,6 +186,9 @@ const {
     margin-bottom: 2rem;
     line-height: 1.6;
   }
+  :global([data-theme="dark"]) .project-showcase__description {
+    color: #a3a3a3;
+  }
 
   .project-showcase__tech-stack {
     display: flex;
@@ -196,6 +205,10 @@ const {
     background-color: #f3f4f6;
     border-radius: 9999px;
   }
+  :global([data-theme="dark"]) .project-showcase__tech-tag {
+    color: #d1d5db;
+    background-color: #262626;
+  }
 
   .project-showcase__cta {
     display: inline-flex;
@@ -207,9 +220,15 @@ const {
     text-decoration: none;
     transition: color 0.2s ease;
   }
+  :global([data-theme="dark"]) .project-showcase__cta {
+    color: #ffffff;
+  }
 
   .project-showcase__cta:hover {
     color: #374151;
+  }
+  :global([data-theme="dark"]) .project-showcase__cta:hover {
+    color: #d1d5db;
   }
 
   .project-showcase__cta-icon {
@@ -257,6 +276,9 @@ const {
       box-shadow 0.3s ease,
       transform 0.3s ease;
     background-color: #f8fafc;
+  }
+  :global([data-theme="dark"]) .project-showcase__collage-img {
+    background-color: #171717;
   }
 
   .project-showcase:hover .project-showcase__collage-img {

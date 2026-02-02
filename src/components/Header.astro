@@ -23,6 +23,48 @@
       <a href="/projects" class="nav-link">Projects</a>
       <a href="/cv" class="nav-link">CV</a>
       <a href="/contact" class="nav-link nav-cta">Contact</a>
+
+      <!-- Theme Toggle -->
+      <button
+        class="theme-toggle"
+        aria-label="Toggle dark mode"
+        title="Toggle theme"
+      >
+        <svg
+          class="icon-sun"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg
+          class="icon-moon"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
     </nav>
   </div>
 </header>
@@ -47,6 +89,10 @@
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--color-gray-200);
+  }
+  :global([data-theme="dark"]) .header {
+    background: rgba(10, 10, 10, 0.85);
+    border-bottom-color: #262626;
   }
   .header-container {
     max-width: var(--max-width-content);
@@ -128,7 +174,42 @@
   .nav-cta:focus-visible {
     border-color: var(--color-black);
     background: var(--color-black);
-    color: #fff;
+    color: var(--color-white);
+  }
+
+  /* Theme toggle button */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.5rem;
+    background: transparent;
+    color: var(--color-gray-600);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-left: 0.5rem;
+  }
+  .theme-toggle:hover {
+    border-color: var(--color-gray-400);
+    color: var(--color-black);
+  }
+  .theme-toggle:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 2px;
+  }
+
+  /* Icon visibility */
+  .theme-toggle .icon-moon {
+    display: none;
+  }
+  :global([data-theme="dark"]) .theme-toggle .icon-sun {
+    display: none;
+  }
+  :global([data-theme="dark"]) .theme-toggle .icon-moon {
+    display: block;
   }
 
   /* Responsive */
@@ -152,6 +233,10 @@
       border-bottom: 1px solid var(--color-gray-200);
       padding: 0.5rem 1rem 1rem;
     }
+    :global([data-theme="dark"]) .nav {
+      background: rgba(10, 10, 10, 0.95);
+      border-bottom-color: #262626;
+    }
     .nav.open {
       display: flex;
     }
@@ -161,6 +246,10 @@
     }
     .nav-cta {
       border-radius: 0.6rem;
+    }
+    .theme-toggle {
+      margin-left: 0;
+      margin-top: 0.5rem;
     }
   }
 </style>
@@ -193,8 +282,32 @@
         a.addEventListener("click", () => {
           nav.classList.remove("open");
           btn.setAttribute("aria-expanded", "false");
-        })
+        }),
       );
+    }
+
+    // Theme toggle
+    const themeToggle = document.querySelector(".theme-toggle");
+    const html = document.documentElement;
+
+    // Check for saved theme or system preference
+    const savedTheme = localStorage.getItem("theme");
+    const systemPrefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)",
+    ).matches;
+
+    if (savedTheme === "dark" || (!savedTheme && systemPrefersDark)) {
+      html.setAttribute("data-theme", "dark");
+    }
+
+    if (themeToggle) {
+      themeToggle.addEventListener("click", () => {
+        const isDark = html.getAttribute("data-theme") === "dark";
+        const newTheme = isDark ? "light" : "dark";
+
+        html.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+      });
     }
   })();
 </script>

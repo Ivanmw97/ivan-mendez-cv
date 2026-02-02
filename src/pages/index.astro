@@ -39,6 +39,9 @@ import Footer from "../components/Footer.astro";
     padding: 4rem 2rem;
     background-color: var(--color-gray-50);
   }
+  :global([data-theme="dark"]) .hero {
+    background-color: #0a0a0a;
+  }
 
   .hero-container {
     max-width: 56rem;
@@ -57,6 +60,9 @@ import Footer from "../components/Footer.astro";
     color: var(--color-black);
     margin: 0;
   }
+  :global([data-theme="dark"]) .hero-title {
+    color: #ffffff;
+  }
 
   .hero-subtitle {
     font-size: 1.25rem;
@@ -64,6 +70,9 @@ import Footer from "../components/Footer.astro";
     line-height: 1.6;
     color: var(--color-gray-600);
     max-width: 42rem;
+  }
+  :global([data-theme="dark"]) .hero-subtitle {
+    color: #a3a3a3;
   }
 
   .cta-buttons {
@@ -90,11 +99,20 @@ import Footer from "../components/Footer.astro";
     color: var(--color-white);
     background-color: var(--color-black);
   }
+  :global([data-theme="dark"]) .cta-button--primary {
+    color: #0a0a0a;
+    background-color: #ffffff;
+  }
 
   .cta-button--secondary {
     color: var(--color-black);
     background-color: var(--color-white);
     border: 1px solid var(--color-gray-300);
+  }
+  :global([data-theme="dark"]) .cta-button--secondary {
+    color: #ffffff;
+    background-color: transparent;
+    border-color: #404040;
   }
 
   .cta-button:hover {

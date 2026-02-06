@@ -72,6 +72,24 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://ivanmendez.dev").href;
       name="twitter:image"
       content="https://ivanmendez.dev/og-preview.png"
     />
+    {
+      import.meta.env.PROD && (
+        <>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-JH4CFQ9VJ8"
+          />
+          <script is:inline>
+            {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-JH4CFQ9VJ8');
+      `}
+          </script>
+        </>
+      )
+    }
   </head>
   <body>
     <script is:inline>

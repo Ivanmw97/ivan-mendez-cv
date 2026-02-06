@@ -81,11 +81,12 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://ivanmendez.dev").href;
           />
           <script is:inline>
             {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-JH4CFQ9VJ8');
-      `}
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){window.dataLayer.push(arguments);}
+            window.gtag = gtag;
+            gtag('js', new Date());
+            gtag('config', 'G-JH4CFQ9VJ8');
+          `}
           </script>
         </>
       )

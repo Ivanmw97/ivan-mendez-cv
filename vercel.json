@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "https://www.ivanmendez.dev/:path*",
+      "destination": "https://ivanmendez.dev/:path*",
+      "permanent": true
+    }
+  ]
+}

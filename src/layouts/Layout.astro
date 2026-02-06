@@ -12,6 +12,9 @@ const {
   description = "Mobile and web developer specialized in Kotlin, Swift and modern frontend technologies. Building performant, scalable and elegant digital products.",
   descriptionEs = "Desarrollador móvil y web especializado en Kotlin, Swift y tecnologías frontend modernas. Creando productos digitales eficientes, escalables y elegantes.",
 } = Astro.props;
+
+// Generate canonical URL using the configured site
+const canonicalUrl = new URL(Astro.url.pathname, "https://ivanmendez.dev").href;
 ---
 
 <!doctype html>
@@ -29,6 +32,9 @@ const {
       data-description-es={descriptionEs}
     />
     <meta name="author" content="Iván Méndez" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" sizes="any" />

@@ -1,7 +1,13 @@
 {
   "redirects": [
     {
-      "source": "https://www.ivanmendez.dev/:path*",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.ivanmendez.dev"
+        }
+      ],
       "destination": "https://ivanmendez.dev/:path*",
       "permanent": true
     }

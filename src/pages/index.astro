@@ -7,36 +7,124 @@ import Footer from "../components/Footer.astro";
 <Layout>
   <Header />
 
-  <main class="hero">
+  <!-- HERO -->
+  <section class="hero">
     <div class="hero-container">
-      <h1 class="hero-title" data-i18n="home.heroTitle">
-        Building digital experiences with precision and purpose.
-      </h1>
+      <p class="hero-label" data-i18n="home.heroLabel">Mobile Engineer</p>
+      <h1 class="hero-title">Iván Méndez</h1>
+      <p class="hero-role" data-i18n="home.heroRole">Android · iOS · Flutter</p>
+    </div>
+  </section>
 
-      <p class="hero-subtitle" data-i18n="home.heroSubtitle">
-        A software developer and digital creator crafting elegant and efficient
-        solutions.
+  <!-- SUMMARY -->
+  <section class="section summary-section">
+    <div class="section-inner">
+      <p class="summary-text" data-i18n="home.summary">
+        I design and build mobile applications for Android and iOS, from native
+        Kotlin and Swift to cross-platform Flutter. With a product-focused
+        mindset and a strong foundation in clean architecture, I deliver
+        reliable, scalable software that solves real problems. I also build
+        modern web applications when the project calls for it.
       </p>
+    </div>
+  </section>
 
+  <!-- EXPERTISE -->
+  <section class="section expertise-section">
+    <div class="section-inner">
+      <h2 class="section-heading" data-i18n="home.expertiseTitle">
+        Core Expertise
+      </h2>
+      <div class="expertise-grid">
+        <div class="expertise-item">
+          <h3 class="expertise-item__title" data-i18n="home.expertise1Title">
+            Native Android
+          </h3>
+          <p class="expertise-item__desc" data-i18n="home.expertise1Desc">
+            Kotlin, Jetpack Compose, MVVM, and the modern Android stack.
+          </p>
+        </div>
+        <div class="expertise-item">
+          <h3 class="expertise-item__title" data-i18n="home.expertise2Title">
+            Native iOS
+          </h3>
+          <p class="expertise-item__desc" data-i18n="home.expertise2Desc">
+            Swift, SwiftUI, UIKit, and Apple platform best practices.
+          </p>
+        </div>
+        <div class="expertise-item">
+          <h3 class="expertise-item__title" data-i18n="home.expertise3Title">
+            Cross-Platform
+          </h3>
+          <p class="expertise-item__desc" data-i18n="home.expertise3Desc">
+            Flutter & Dart for high-performance, single-codebase mobile apps.
+          </p>
+        </div>
+        <div class="expertise-item">
+          <h3 class="expertise-item__title" data-i18n="home.expertise4Title">
+            Architecture
+          </h3>
+          <p class="expertise-item__desc" data-i18n="home.expertise4Desc">
+            Clean Architecture, SOLID principles, and scalable project
+            structure.
+          </p>
+        </div>
+        <div class="expertise-item">
+          <h3 class="expertise-item__title" data-i18n="home.expertise5Title">
+            Performance
+          </h3>
+          <p class="expertise-item__desc" data-i18n="home.expertise5Desc">
+            Optimized builds, efficient rendering, and production-grade
+            reliability.
+          </p>
+        </div>
+        <div class="expertise-item">
+          <h3 class="expertise-item__title" data-i18n="home.expertise6Title">
+            Web Development
+          </h3>
+          <p class="expertise-item__desc" data-i18n="home.expertise6Desc">
+            Modern frontend with React, Astro, and responsive design systems.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section cta-section">
+    <div class="section-inner cta-inner">
+      <h2 class="section-heading" data-i18n="home.ctaTitle">
+        Let's Work Together
+      </h2>
+      <p class="cta-desc" data-i18n="home.ctaDesc">
+        Looking for a mobile engineer or have a project in mind? I'd like to
+        hear about it.
+      </p>
       <div class="cta-buttons">
         <a
-          href="/cv"
+          href="/projects"
           class="cta-button cta-button--primary"
-          data-i18n="home.viewCV">View My CV</a
+          data-i18n="home.viewProjects">View All Projects →</a
         >
         <a
-          href="/projects"
+          href="/cv"
           class="cta-button cta-button--secondary"
-          data-i18n="home.viewProjects">View Projects</a
+          data-i18n="home.downloadCV">Download CV</a
+        >
+        <a
+          href="/contact"
+          class="cta-button cta-button--secondary"
+          data-i18n="home.contactMe">Contact Me</a
         >
       </div>
     </div>
-  </main>
+  </section>
 
   <Footer />
 </Layout>
 
 <style>
+  /* ── Hero ── */
   .hero {
     min-height: calc(100vh - 4.5rem);
     display: flex;
@@ -55,14 +143,25 @@ import Footer from "../components/Footer.astro";
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
+    gap: 1rem;
+    will-change: transform;
+    transform: translateY(0);
+  }
+
+  .hero-label {
+    font-size: 1rem;
+    font-weight: var(--font-weight-medium);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-gray-500);
+    margin: 0;
   }
 
   .hero-title {
-    font-size: 3.75rem;
+    font-size: 6rem;
     font-weight: var(--font-weight-black);
-    line-height: 1.1;
-    letter-spacing: -0.025em;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
     color: var(--color-black);
     margin: 0;
   }
@@ -70,21 +169,122 @@ import Footer from "../components/Footer.astro";
     color: #ffffff;
   }
 
-  .hero-subtitle {
-    font-size: 1.25rem;
+  .hero-role {
+    font-size: 1.5rem;
     font-weight: var(--font-weight-normal);
-    line-height: 1.6;
+    line-height: 1.5;
     color: var(--color-gray-600);
-    max-width: 42rem;
+    margin: 0;
   }
-  :global([data-theme="dark"]) .hero-subtitle {
+  :global([data-theme="dark"]) .hero-role {
+    color: #a3a3a3;
+  }
+
+  /* ── Shared section ── */
+  .section {
+    padding: 5rem 2rem;
+  }
+
+  .section-inner {
+    max-width: 56rem;
+    margin: 0 auto;
+  }
+
+  .section-heading {
+    font-size: 1.75rem;
+    font-weight: var(--font-weight-bold);
+    letter-spacing: -0.02em;
+    color: var(--color-black);
+    margin: 0 0 1.5rem;
+  }
+  :global([data-theme="dark"]) .section-heading {
+    color: #ffffff;
+  }
+
+  /* ── Summary ── */
+  .summary-section {
+    border-top: 1px solid var(--color-gray-200);
+  }
+
+  .summary-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-gray-600);
+    max-width: 48rem;
+  }
+  :global([data-theme="dark"]) .summary-text {
+    color: #a3a3a3;
+  }
+
+  /* ── Expertise grid ── */
+  .expertise-section {
+    border-top: 1px solid var(--color-gray-200);
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .expertise-item {
+    padding: 1.5rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 12px;
+    transition: border-color var(--transition-base);
+  }
+
+  .expertise-item:hover {
+    border-color: var(--color-gray-400);
+  }
+
+  .expertise-item__title {
+    font-size: 1rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-black);
+    margin: 0 0 0.5rem;
+  }
+  :global([data-theme="dark"]) .expertise-item__title {
+    color: #ffffff;
+  }
+
+  .expertise-item__desc {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--color-gray-500);
+    margin: 0;
+  }
+
+  /* ── CTA section ── */
+  .cta-section {
+    border-top: 1px solid var(--color-gray-200);
+    background-color: var(--color-gray-50);
+  }
+  :global([data-theme="dark"]) .cta-section {
+    background-color: #0f0f0f;
+  }
+
+  .cta-inner {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-desc {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-gray-600);
+    max-width: 36rem;
+    margin: 0 0 2rem;
+  }
+  :global([data-theme="dark"]) .cta-desc {
     color: #a3a3a3;
   }
 
   .cta-buttons {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
     flex-wrap: wrap;
     justify-content: center;
   }
@@ -93,8 +293,8 @@ import Footer from "../components/Footer.astro";
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0.875rem 2rem;
-    font-size: 1rem;
+    padding: 0.75rem 1.75rem;
+    font-size: 0.9375rem;
     font-weight: var(--font-weight-medium);
     border-radius: 2rem;
     transition: all var(--transition-base);
@@ -112,7 +312,7 @@ import Footer from "../components/Footer.astro";
 
   .cta-button--secondary {
     color: var(--color-black);
-    background-color: var(--color-white);
+    background-color: transparent;
     border: 1px solid var(--color-gray-300);
   }
   :global([data-theme="dark"]) .cta-button--secondary {
@@ -125,79 +325,27 @@ import Footer from "../components/Footer.astro";
     transform: translateY(-2px);
     opacity: 1;
   }
-
   .cta-button--primary:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
-
   .cta-button--secondary:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.06);
     border-color: var(--color-gray-400);
   }
 
-  /* Tablet */
-  @media (max-width: 1024px) {
-    .hero-title {
-      font-size: 3rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1.125rem;
-    }
-  }
-
-  /* Mobile */
-  @media (max-width: 768px) {
-    .hero {
-      min-height: calc(100vh - 4rem);
-      padding: 3rem 1.5rem;
-    }
-
-    .hero-title {
-      font-size: 2.25rem;
-    }
-
-    .hero-subtitle {
-      font-size: 1rem;
-    }
-
-    .hero-subtitle br {
-      display: none;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .hero-title {
-      font-size: 1.875rem;
-    }
-
-    .hero-title br {
-      display: none;
-    }
-
-    .cta-buttons {
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-
-    .cta-button {
-      padding: 0.75rem 1.75rem;
-      font-size: 0.9375rem;
-    }
-  }
-
+  /* ── Animations ── */
+  .hero-label,
   .hero-title,
-  .hero-subtitle,
-  .cta-buttons {
+  .hero-role {
     opacity: 0;
     transform: translateY(20px);
     animation: fadeUp 0.8s ease forwards;
   }
-  .hero-subtitle {
-    animation-delay: 0.15s;
+  .hero-title {
+    animation-delay: 0.1s;
   }
-  .cta-buttons {
-    animation-delay: 0.3s;
+  .hero-role {
+    animation-delay: 0.2s;
   }
 
   @keyframes fadeUp {
@@ -207,9 +355,47 @@ import Footer from "../components/Footer.astro";
     }
   }
 
-  .hero-container {
-    will-change: transform;
-    transform: translateY(0); /* estado inicial */
+  /* ── Tablet ── */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 4.5rem;
+    }
+    .expertise-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .hero {
+      min-height: calc(100vh - 4rem);
+      padding: 3rem 1.5rem;
+    }
+    .hero-title {
+      font-size: 3.25rem;
+    }
+    .hero-role {
+      font-size: 1.25rem;
+    }
+    .section {
+      padding: 3.5rem 1.5rem;
+    }
+    .section-heading {
+      font-size: 1.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    .expertise-grid {
+      grid-template-columns: 1fr;
+    }
+    .cta-buttons {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
   }
 </style>
 

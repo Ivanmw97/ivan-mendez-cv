@@ -5,16 +5,53 @@ import Footer from "../components/Footer.astro";
 import ProjectShowcase from "../components/ProjectShowcase.astro";
 import { getProjectImage } from "../constants/images";
 
-const projectsData = {
+interface ProjectEntry {
+  label: string;
+  title: string;
+  description: string;
+  techStack: string[];
+  ctaText?: string;
+  ctaLink?: string;
+  playStoreLink?: string;
+  appStoreLink?: string;
+  imageUrl: string;
+  imageAlt: string;
+  imageBackground?: string;
+}
+
+const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
   en: [
+    {
+      label: "MOBILE APP",
+      title: "Binter",
+      description:
+        "Official app for Binter, the leading airline in the Canary Islands. Development and maintenance of Flutter features, from flight booking to ticket management, for thousands of active users.",
+      techStack: ["Flutter", "Dart"],
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.bintercanarias.binterApp&hl=es",
+      appStoreLink: "https://apps.apple.com/es/app/binter/id929074339",
+      imageUrl: getProjectImage("binter"),
+      imageBackground: "#008900",
+      imageAlt: "Binter Mobile App",
+    },
+    {
+      label: "MOBILE APP",
+      title: "CanaryFly",
+      description:
+        "Official CanaryFly app for booking and managing inter-island flights. Flutter development focused on a smooth and reliable user experience.",
+      techStack: ["Flutter", "Dart"],
+      playStoreLink: "https://play.google.com/store/apps/details?id=es.canaryfly.canaryflyapp&hl=es",
+      appStoreLink: "https://apps.apple.com/es/app/canaryfly/id1240747230",
+      imageUrl: getProjectImage("canaryfly"),
+      imageBackground: "#002DA7",
+      imageAlt: "CanaryFly Mobile App",
+    },
     {
       label: "MOBILE APP",
       title: "DelYo - Padel Match Tracker",
       description:
         "Track your padel journey with simplicity and privacy. A cross-platform Flutter app supporting 6 languages, offline-first architecture, and clean Material Design interface for recording matches, managing players, and viewing statistics.",
       techStack: ["Flutter", "Dart", "Hive", "Provider"],
-      ctaText: "View Project",
-      ctaLink: "https://github.com/Ivanmw97/DelYo",
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.delyo.delyo&hl=es_419",
       imageUrl: getProjectImage("delyo"),
       imageAlt: "DelYo Padel Match Tracker Mobile App",
     },
@@ -66,12 +103,35 @@ const projectsData = {
   es: [
     {
       label: "APP MÓVIL",
+      title: "Binter",
+      description:
+        "App oficial de Binter, la aerolínea líder en Canarias. Desarrollo y mantenimiento de funcionalidades en Flutter, desde reserva de vuelos hasta gestión de billetes, para miles de usuarios activos.",
+      techStack: ["Flutter", "Dart"],
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.bintercanarias.binterApp&hl=es",
+      appStoreLink: "https://apps.apple.com/es/app/binter/id929074339",
+      imageUrl: getProjectImage("binter"),
+      imageBackground: "#008900",
+      imageAlt: "App Móvil de Binter",
+    },
+    {
+      label: "APP MÓVIL",
+      title: "CanaryFly",
+      description:
+        "App oficial de CanaryFly para la reserva y gestión de vuelos interinsulares. Desarrollo Flutter con foco en una experiencia de usuario fluida y fiable.",
+      techStack: ["Flutter", "Dart"],
+      playStoreLink: "https://play.google.com/store/apps/details?id=es.canaryfly.canaryflyapp&hl=es",
+      appStoreLink: "https://apps.apple.com/es/app/canaryfly/id1240747230",
+      imageUrl: getProjectImage("canaryfly"),
+      imageBackground: "#002DA7",
+      imageAlt: "App Móvil de CanaryFly",
+    },
+    {
+      label: "APP MÓVIL",
       title: "DelYo - Seguimiento de Partidos de Pádel",
       description:
         "Registra tu trayectoria en pádel con simplicidad y privacidad. Una app Flutter multiplataforma con soporte para 6 idiomas, arquitectura offline-first e interfaz Material Design limpia para registrar partidos, gestionar jugadores y ver estadísticas.",
       techStack: ["Flutter", "Dart", "Hive", "Provider"],
-      ctaText: "Ver Proyecto",
-      ctaLink: "https://github.com/Ivanmw97/DelYo",
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.delyo.delyo&hl=es_419",
       imageUrl: getProjectImage("delyo"),
       imageAlt: "DelYo App Móvil de Seguimiento de Pádel",
     },
@@ -151,7 +211,10 @@ const projectsData = {
               techStack={project.techStack}
               ctaText={project.ctaText}
               ctaLink={project.ctaLink}
+              playStoreLink={project.playStoreLink}
+              appStoreLink={project.appStoreLink}
               imageUrl={project.imageUrl}
+              imageBackground={project.imageBackground}
               imageAlt={project.imageAlt}
               reversed={index % 2 === 1}
             />
@@ -168,7 +231,10 @@ const projectsData = {
               techStack={project.techStack}
               ctaText={project.ctaText}
               ctaLink={project.ctaLink}
+              playStoreLink={project.playStoreLink}
+              appStoreLink={project.appStoreLink}
               imageUrl={project.imageUrl}
+              imageBackground={project.imageBackground}
               imageAlt={project.imageAlt}
               reversed={index % 2 === 1}
             />
@@ -275,7 +341,7 @@ const projectsData = {
       font-size: 1rem;
     }
   }
-}</style>
+</style>
 
 <script>
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

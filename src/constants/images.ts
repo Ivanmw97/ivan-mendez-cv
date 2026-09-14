@@ -1,4 +1,12 @@
 export const PROJECT_IMAGES = {
+  binter: {
+    main: '/assets/images/projects/binter/binter-banner.png',
+    placeholder: 'https://placehold.co/800x500/4CAF50/FFFFFF?text=Binter'
+  },
+  canaryfly: {
+    main: '/assets/images/projects/canaryfly/canaryfly-banner.png',
+    placeholder: 'https://placehold.co/800x500/152387/FFFFFF?text=CanaryFly'
+  },
   delyo: {
     main: '/assets/images/projects/delyo/delyo-banner-en.png',
     dashboard: '/assets/images/projects/delyo/delyo-dashboard.png',
@@ -43,7 +51,15 @@ export const LOGO_IMAGES = {
 
 export function getProjectImage(project: keyof typeof PROJECT_IMAGES, variant: 'main' | 'placeholder' = 'main') {
   const projectImages = PROJECT_IMAGES[project];
-  
+
+  if (project === 'binter' && variant === 'main') {
+    return projectImages.main;
+  }
+
+  if (project === 'canaryfly' && variant === 'main') {
+    return projectImages.main;
+  }
+
   if (project === 'delyo' && variant === 'main') {
     return projectImages.main;
   }
@@ -68,6 +84,12 @@ export function getProjectImage(project: keyof typeof PROJECT_IMAGES, variant: '
 }
 
 export function hasLocalImage(project: keyof typeof PROJECT_IMAGES, variant: string): boolean {
+  if (project === 'binter' && variant === 'main') {
+    return true;
+  }
+  if (project === 'canaryfly' && variant === 'main') {
+    return true;
+  }
   if (project === 'delyo' && variant === 'main') {
     return true;
   }

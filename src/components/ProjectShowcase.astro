@@ -4,13 +4,16 @@ export interface Props {
   title: string;
   description: string;
   techStack: string[];
-  ctaText: string;
-  ctaLink: string;
+  ctaText?: string;
+  ctaLink?: string;
   imageUrl: string;
   imageAlt: string;
   reversed?: boolean;
   isCollage?: boolean;
   collageImages?: string[];
+  playStoreLink?: string;
+  appStoreLink?: string;
+  imageBackground?: string;
 }
 
 const {
@@ -25,6 +28,9 @@ const {
   reversed = false,
   isCollage = false,
   collageImages = [],
+  playStoreLink,
+  appStoreLink,
+  imageBackground,
 } = Astro.props;
 ---
 
@@ -44,23 +50,43 @@ const {
             ))
           }
         </div>
-        <a href={ctaLink} class="project-showcase__cta">
-          {ctaText}
-          <svg
-            class="project-showcase__cta-icon"
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-          >
-            <path
-              d="M6 3L11 8L6 13"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"></path>
-          </svg>
-        </a>
+        <div class="project-showcase__cta-group">
+          {playStoreLink && (
+            <a href={playStoreLink} target="_blank" rel="noopener noreferrer" class="project-showcase__cta project-showcase__cta--store">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8 5v14l11-7z"></path>
+              </svg>
+              Google Play
+            </a>
+          )}
+          {appStoreLink && (
+            <a href={appStoreLink} target="_blank" rel="noopener noreferrer" class="project-showcase__cta project-showcase__cta--store">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.207-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-2.09-.87-3.833-.87-1.79 0-2.335.87-3.833.87-1.48 0-2.55-1.33-3.5-2.66-1.9-2.6-3.35-7.35-1.4-10.85.97-1.75 2.72-2.86 4.6-2.89 1.44-.03 2.79.97 3.833.97.994 0 2.68-1.2 4.5-1.02.77.03 2.93.31 4.32 2.34-.11.07-2.58 1.51-2.56 4.5.03 3.57 3.15 4.76 3.19 4.78z"></path>
+              </svg>
+              App Store
+            </a>
+          )}
+          {!playStoreLink && !appStoreLink && (
+            <a href={ctaLink} target="_blank" rel="noopener noreferrer" class="project-showcase__cta">
+              {ctaText}
+              <svg
+                class="project-showcase__cta-icon"
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+              >
+                <path
+                  d="M6 3L11 8L6 13"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></path>
+              </svg>
+            </a>
+          )}
+        </div>
       </div>
       <div class="project-showcase__image">
         {
@@ -80,6 +106,7 @@ const {
               src={imageUrl}
               alt={imageAlt}
               class="project-showcase__img"
+              style={imageBackground ? `background-color: ${imageBackground};` : undefined}
               loading="lazy"
             />
           )
@@ -210,25 +237,41 @@ const {
     background-color: #262626;
   }
 
+  .project-showcase__cta-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
   .project-showcase__cta {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 1.125rem;
+    padding: 0.75rem 1.5rem;
+    border: 1.5px solid #111827;
+    border-radius: 0.75rem;
+    font-size: 1rem;
     font-weight: 600;
     color: #111827;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
   }
   :global([data-theme="dark"]) .project-showcase__cta {
+    border-color: #ffffff;
     color: #ffffff;
   }
 
   .project-showcase__cta:hover {
-    color: #374151;
+    background-color: #111827;
+    color: #ffffff;
+    transform: translateY(-2px);
   }
   :global([data-theme="dark"]) .project-showcase__cta:hover {
-    color: #d1d5db;
+    background-color: #ffffff;
+    color: #111827;
   }
 
   .project-showcase__cta-icon {
@@ -237,6 +280,10 @@ const {
 
   .project-showcase__cta:hover .project-showcase__cta-icon {
     transform: translateX(0.25rem);
+  }
+
+  .project-showcase__cta--store svg {
+    flex-shrink: 0;
   }
 
   .project-showcase__image {
@@ -327,6 +374,10 @@ const {
   @media (max-width: 1023px) {
     .project-showcase__content {
       text-align: center;
+    }
+
+    .project-showcase__cta-group {
+      justify-content: center;
     }
 
     .project-showcase__image {

@@ -60,6 +60,19 @@ export default {
   ],
   experiences: [
     {
+      company: "Atlantis Technology (Binter)",
+      position: "Software Developer",
+      period: "Mar. 2026 - Present",
+      location: "Las Palmas de Gran Canaria, Spain",
+      achievements: [
+        "Develop and maintain Flutter applications for Binter, most notably nt (Binter's official app) and CanaryFly, alongside cross-platform projects with JavaScript/TypeScript",
+        "Handle requirements analysis, technical documentation, and direct client communication, beyond just coding",
+        "Have the freedom to define the architecture of new projects from scratch, applying scalable and maintainable patterns",
+        "Collaborate with cross-functional teams, combining mobile development with web integrations and tooling in JS/TS",
+        "Contribute to technical decision-making alongside stakeholders, aligning solutions with business needs"
+      ]
+    },
+    {
       company: "CIB Group of companies",
       position: "Software Developer",
       period: "Mar. 2021 - Apr. 2025",
@@ -88,10 +101,24 @@ export default {
   ],
   projects: [
     {
+      title: "Binter",
+      description: "Official app for Binter, the leading airline in the Canary Islands. Development and maintenance of Flutter features, from flight booking to ticket management, for thousands of active users.",
+      technologies: ["Flutter", "Dart"],
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.bintercanarias.binterApp&hl=es",
+      appStoreLink: "https://apps.apple.com/es/app/binter/id929074339"
+    },
+    {
+      title: "CanaryFly",
+      description: "Official CanaryFly app for booking and managing inter-island flights. Flutter development focused on a smooth and reliable user experience.",
+      technologies: ["Flutter", "Dart"],
+      playStoreLink: "https://play.google.com/store/apps/details?id=es.canaryfly.canaryflyapp&hl=es",
+      appStoreLink: "https://apps.apple.com/es/app/canaryfly/id1240747230"
+    },
+    {
       title: "DelYo - Padel Match Tracker",
       description: "Track your padel journey with simplicity and privacy. A cross-platform Flutter app supporting 6 languages, offline-first architecture, and clean Material Design interface for recording matches, managing players, and viewing statistics.",
       technologies: ["Flutter", "Dart", "Hive", "Provider", "Material Design", "Internationalization"],
-      link: "https://github.com/Ivanmw97/DelYo"
+      playStoreLink: "https://play.google.com/store/apps/details?id=com.delyo.delyo&hl=es_419"
     },
     {
       title: "KompKit",

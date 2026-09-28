@@ -146,23 +146,22 @@ const { introAnimation = false } = Astro.props;
     }
 
     /* Delayed reveal: only used on the homepage, once the hero intro has
-       landed the name (see /js/hero.js). Everywhere else the header
-       renders visible immediately. */
+       landed the name (see /js/hero.js). Everywhere else the header renders
+       visible immediately.
+       Fades only — never transform: any transform other than `none` would
+       make the header the containing block for its fixed-position
+       descendants, shrinking the mobile nav overlay to the size of the bar
+       instead of the viewport. */
     .header--intro {
       opacity: 0;
-      transform: translateY(-10px);
-      transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
+      transition: opacity 0.6s ease;
     }
     .header--intro.is-visible {
       opacity: 1;
-      transform: translateY(0);
     }
     @media (prefers-reduced-motion: reduce) {
       .header--intro {
         opacity: 1;
-        transform: none;
         transition: none;
       }
     }

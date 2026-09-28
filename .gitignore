@@ -28,3 +28,7 @@ pnpm-debug.log*
 
 # claude code local config
 .claude/
+
+# agent instructions (local only)
+CLAUDE.md
+AGENTS.md

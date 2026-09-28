@@ -1,4 +1,16 @@
-<header class="header" id="site-header" role="banner">
+---
+interface Props {
+  introAnimation?: boolean;
+}
+
+const { introAnimation = false } = Astro.props;
+---
+
+<header
+  class={`header ${introAnimation ? "header--intro" : ""}`}
+  id="site-header"
+  role="banner"
+>
   <div class="header-bar">
     <!-- Brand -->
     <a href="/" class="brand" aria-label="Ivan Mendez — Home">
@@ -131,6 +143,28 @@
     }
     :global([data-theme="dark"]) .header {
       background: transparent;
+    }
+
+    /* Delayed reveal: only used on the homepage, once the hero intro has
+       landed the name (see /js/hero.js). Everywhere else the header
+       renders visible immediately. */
+    .header--intro {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition:
+        opacity 0.6s ease,
+        transform 0.6s ease;
+    }
+    .header--intro.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .header--intro {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
     }
 
     .header-bar {

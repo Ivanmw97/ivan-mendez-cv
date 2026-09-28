@@ -13,63 +13,44 @@
   window.addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  var titleText = "Iván Méndez";
-  var label = document.querySelector(".hero-label");
-  var titleSpan = document.querySelector(".hero-title__text");
-  var cursor = document.querySelector(".hero-cursor");
-  var roleSpan = document.querySelector(".hero-role__text");
-  var roleEl = document.querySelector(".hero-role");
+  var header = document.getElementById("site-header");
+  function revealHeader() {
+    if (header) header.classList.add("is-visible");
+  }
 
-  if (!titleSpan || !cursor || !roleSpan || !label || !roleEl) return;
+  var scrollIndicator = document.querySelector(".scroll-indicator");
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener("click", function () {
+      var next = document.querySelector(".summary-section");
+      if (next) {
+        next.scrollIntoView({
+          behavior: reduceMotion ? "auto" : "smooth",
+          block: "start",
+        });
+      }
+    });
+  }
+
+  var roleSpan = document.querySelector(".hero-role__text");
 
   function getRoleText() {
     if (window.t) return window.t("home.heroRole");
-    return "Android \u00b7 iOS \u00b7 Flutter";
+    return "Android · iOS · Flutter";
   }
 
-  function typeText(target, text, speed, cb) {
-    var i = 0;
-    function tick() {
-      if (i < text.length) {
-        target.textContent += text.charAt(i);
-        i++;
-        setTimeout(tick, speed);
-      } else if (cb) {
-        cb();
-      }
-    }
-    tick();
-  }
-
-  if (reduceMotion) {
-    label.classList.add("visible");
-    label.style.opacity = "1";
-    label.style.transform = "none";
-    titleSpan.textContent = titleText;
-    cursor.classList.add("hidden");
+  if (roleSpan) {
     roleSpan.textContent = getRoleText();
-    roleEl.classList.add("visible");
-    return;
+    window.addEventListener("langchange", function () {
+      roleSpan.textContent = getRoleText();
+    });
   }
 
-  setTimeout(function () {
-    label.classList.add("visible");
-  }, 200);
-
-  setTimeout(function () {
-    typeText(titleSpan, titleText, 70, function () {
-      setTimeout(function () {
-        roleEl.classList.add("visible");
-        typeText(roleSpan, getRoleText(), 50, function () {
-          setTimeout(function () {
-            cursor.classList.add("hidden");
-          }, 1500);
-        });
-      }, 400);
-    });
-  }, 800);
-
-  window.addEventListener("langchange", function () {
-    if (roleSpan) roleSpan.textContent = getRoleText();
-  });
+  // The "IM" letters split apart at 0.66s and the name is wiped open
+  // between 0.74s and 1.32s (see .hero-mark / .hero-name in index.astro).
+  // Bring the header in once the name has landed.
+  if (reduceMotion) {
+    revealHeader();
+  } else {
+    setTimeout(revealHeader, 1350);
+  }
 })();

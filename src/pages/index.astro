@@ -5,17 +5,53 @@ import Footer from "../components/Footer.astro";
 ---
 
 <Layout>
-  <Header />
+  <Header introAnimation />
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-container">
-      <p class="hero-label" data-i18n="home.heroLabel">Mobile Engineer</p>
-      <h1 class="hero-title">
-        <span class="hero-title__text"></span><span class="hero-cursor"></span>
-      </h1>
-      <p class="hero-role"><span class="hero-role__text"></span></p>
+    <div class="hero-bg" aria-hidden="true">
+      <span class="hero-bg__blob hero-bg__blob--1"></span>
+      <span class="hero-bg__blob hero-bg__blob--2"></span>
     </div>
+
+    <!-- Intro: the "IM" monogram punches in, then its two letters split
+         apart to reveal the name from between them. -->
+    <span class="hero-mark" aria-hidden="true"
+      ><span class="hero-mark__i">I</span><span class="hero-mark__m">M</span></span
+    >
+
+    <div class="hero-container">
+      <p
+        class="hero-label hero-reveal"
+        data-i18n="home.heroLabel"
+        style="--reveal-delay: 1.22s;">Mobile Engineer</p
+      >
+      <h1 class="hero-title hero-name">
+        <span class="hero-title__text">Iván Méndez</span>
+      </h1>
+      <p class="hero-role hero-reveal" style="--reveal-delay: 1.34s;">
+        <span class="hero-role__text"></span>
+      </p>
+    </div>
+
+    <button
+      class="scroll-indicator"
+      type="button"
+      aria-label="Scroll to next section"
+    >
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M6 9l6 6 6-6"></path>
+      </svg>
+    </button>
   </section>
 
   <!-- SUMMARY -->
@@ -126,8 +162,19 @@ import Footer from "../components/Footer.astro";
 </Layout>
 
 <style>
+  /* Match the page background to the hero's so nothing shows through
+     the transparent header strip while it's hidden during the intro. */
+  :global(body) {
+    background-color: var(--color-gray-50);
+  }
+  :global([data-theme="dark"] body) {
+    background-color: #0a0a0a;
+  }
+
   /* ── Hero ── */
   .hero {
+    position: relative;
+    overflow: hidden;
     min-height: calc(100vh - 4.5rem);
     display: flex;
     align-items: center;
@@ -139,7 +186,71 @@ import Footer from "../components/Footer.astro";
     background-color: #0a0a0a;
   }
 
+  /* ── Ambient background ── */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-bg__blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.55;
+    will-change: transform;
+  }
+
+  .hero-bg__blob--1 {
+    top: -8rem;
+    left: -6rem;
+    width: 26rem;
+    height: 26rem;
+    background: var(--color-gray-300);
+    animation: hero-drift-1 16s ease-in-out infinite alternate;
+  }
+  :global([data-theme="dark"]) .hero-bg__blob--1 {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .hero-bg__blob--2 {
+    bottom: -10rem;
+    right: -6rem;
+    width: 24rem;
+    height: 24rem;
+    background: var(--color-gray-200);
+    animation: hero-drift-2 20s ease-in-out infinite alternate;
+  }
+  :global([data-theme="dark"]) .hero-bg__blob--2 {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  @keyframes hero-drift-1 {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(50px, 40px) scale(1.12);
+    }
+  }
+  @keyframes hero-drift-2 {
+    0% {
+      transform: translate(0, 0) scale(1);
+    }
+    100% {
+      transform: translate(-40px, -30px) scale(1.08);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-bg__blob {
+      animation: none;
+    }
+  }
+
   .hero-container {
+    position: relative;
+    z-index: 1;
     max-width: 56rem;
     text-align: center;
     display: flex;
@@ -148,6 +259,77 @@ import Footer from "../components/Footer.astro";
     gap: 1rem;
     will-change: transform;
     transform: translateY(0);
+  }
+
+  /* ── Scroll indicator ── */
+  .scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 2.25rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    border: 1px solid var(--color-gray-300);
+    background: transparent;
+    color: var(--color-gray-500);
+    cursor: pointer;
+    padding: 0;
+    opacity: 0;
+    transform: translateX(-50%);
+    animation:
+      hero-bounce 2.4s ease-in-out infinite,
+      hero-fade-in 0.4s ease 1.75s forwards;
+    transition:
+      border-color var(--transition-fast),
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+  .scroll-indicator:hover {
+    border-color: var(--color-black);
+    color: var(--color-black);
+    background: var(--color-gray-100);
+  }
+  :global([data-theme="dark"]) .scroll-indicator {
+    border-color: #404040;
+    color: #a3a3a3;
+  }
+  :global([data-theme="dark"]) .scroll-indicator:hover {
+    border-color: #ffffff;
+    color: #ffffff;
+    background: #171717;
+  }
+  .scroll-indicator:focus-visible {
+    outline: 2px solid var(--color-black);
+    outline-offset: 3px;
+  }
+
+  @keyframes hero-bounce {
+    0%,
+    100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(8px);
+    }
+  }
+  @keyframes hero-fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-indicator {
+      opacity: 1;
+      animation: none;
+    }
   }
 
   .hero-label {
@@ -335,58 +517,162 @@ import Footer from "../components/Footer.astro";
     border-color: var(--color-gray-400);
   }
 
-  /* ── Animations ── */
-  .hero-label {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  .hero-label.visible {
-    animation: fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  }
-
+  /* ── Intro: "IM" punches in, then splits open to reveal the name ── */
   .hero-title {
     min-height: 1.2em;
-  }
-
-  .hero-cursor {
-    display: inline-block;
-    width: 3px;
-    height: 0.85em;
-    background: var(--color-black);
-    margin-left: 2px;
-    vertical-align: baseline;
-    animation: blink 0.6s step-end infinite;
-  }
-  :global([data-theme="dark"]) .hero-cursor {
-    background: #ffffff;
-  }
-  .hero-cursor.hidden {
-    opacity: 0;
-    animation: none;
+    /* headroom so the clip-path wipe can never crop the accents */
+    padding-block: 0.14em;
+    margin-block: -0.14em;
   }
 
   .hero-role {
     min-height: 1.5em;
-    opacity: 0;
-  }
-  .hero-role.visible {
-    opacity: 1;
   }
 
-  @keyframes fadeUp {
-    to {
+  /* The monogram slams in from almost nothing, overshoots, settles — then
+     its two letters fly apart and shrink down to the size of the name's
+     initials while the name itself is wiped open from between them. */
+  .hero-mark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    display: block;
+    white-space: nowrap;
+    font-size: clamp(5.5rem, 18vw, 15rem);
+    font-weight: var(--font-weight-black);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-black);
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.04);
+    animation: hero-mark-punch 0.42s forwards;
+  }
+  :global([data-theme="dark"]) .hero-mark {
+    color: #ffffff;
+  }
+
+  .hero-mark span {
+    display: inline-block;
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0) scale(1) rotate(0deg);
+  }
+  .hero-mark__i {
+    animation: hero-mark-split-left 0.44s cubic-bezier(0.55, 0, 0.3, 1) 0.66s
+      forwards;
+  }
+  .hero-mark__m {
+    animation: hero-mark-split-right 0.44s cubic-bezier(0.55, 0, 0.3, 1) 0.66s
+      forwards;
+  }
+
+  @keyframes hero-mark-punch {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.04);
+      animation-timing-function: cubic-bezier(0.5, 0, 0.35, 1);
+    }
+    30% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(0.5);
+      animation-timing-function: cubic-bezier(0.25, 0, 0.25, 1);
+    }
+    62% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1.16);
+      animation-timing-function: cubic-bezier(0.3, 0, 0.2, 1);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  @keyframes hero-mark-split-left {
+    0% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0) scale(1) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      filter: blur(7px);
+      transform: translateX(-0.85em) scale(0.42) rotate(-5deg);
+    }
+  }
+
+  @keyframes hero-mark-split-right {
+    0% {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0) scale(1) rotate(0deg);
+    }
+    100% {
+      opacity: 0;
+      filter: blur(7px);
+      transform: translateX(0.85em) scale(0.42) rotate(5deg);
+    }
+  }
+
+  /* The name is wiped open from the centre outwards, through the gap the
+     two letters leave behind. */
+  .hero-name {
+    opacity: 0;
+    clip-path: inset(0 50% 0 50%);
+    transform: scale(0.92);
+    animation: hero-name-reveal 0.58s cubic-bezier(0.16, 1, 0.3, 1) 0.74s
+      forwards;
+  }
+
+  @keyframes hero-name-reveal {
+    0% {
+      opacity: 0;
+      clip-path: inset(0 50% 0 50%);
+      transform: scale(0.92);
+    }
+    25% {
+      opacity: 1;
+      clip-path: inset(0 34% 0 34%);
+      transform: scale(0.96);
+    }
+    100% {
+      opacity: 1;
+      clip-path: inset(0 0 0 0);
+      transform: scale(1);
+    }
+  }
+
+  /* Supporting lines then snap into place, quickly and in order. */
+  .hero-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: hero-text-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--reveal-delay, 0s);
+  }
+
+  @keyframes hero-text-in {
+    0% {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    100% {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  @keyframes blink {
-    0%,
-    100% {
-      opacity: 1;
+  @media (prefers-reduced-motion: reduce) {
+    .hero-mark {
+      display: none;
     }
-    50% {
-      opacity: 0;
+    .hero-reveal,
+    .hero-name {
+      opacity: 1;
+      clip-path: none;
+      transform: none;
+      animation: none;
     }
   }
 
@@ -411,6 +697,16 @@ import Footer from "../components/Footer.astro";
     }
     .hero-role {
       font-size: 1.25rem;
+    }
+    .scroll-indicator {
+      bottom: 1.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+    .hero-bg__blob--1,
+    .hero-bg__blob--2 {
+      width: 16rem;
+      height: 16rem;
     }
     .section {
       padding: 3.5rem 1.5rem;

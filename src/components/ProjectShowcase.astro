@@ -8,6 +8,8 @@ export interface Props {
   ctaLink?: string;
   imageUrl: string;
   imageAlt: string;
+  imageWidth?: number;
+  imageHeight?: number;
   reversed?: boolean;
   isCollage?: boolean;
   collageImages?: string[];
@@ -25,6 +27,8 @@ const {
   ctaLink,
   imageUrl,
   imageAlt,
+  imageWidth,
+  imageHeight,
   reversed = false,
   isCollage = false,
   collageImages = [],
@@ -107,7 +111,10 @@ const {
               alt={imageAlt}
               class="project-showcase__img"
               style={imageBackground ? `background-color: ${imageBackground};` : undefined}
+              width={imageWidth}
+              height={imageHeight}
               loading="lazy"
+              decoding="async"
             />
           )
         }

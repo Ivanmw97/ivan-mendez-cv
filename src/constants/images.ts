@@ -8,14 +8,14 @@ export const PROJECT_IMAGES = {
     placeholder: 'https://placehold.co/800x500/152387/FFFFFF?text=CanaryFly'
   },
   delyo: {
-    main: '/assets/images/projects/delyo/delyo-banner-en.png',
+    main: '/assets/images/projects/delyo/delyo-banner-en.webp',
     dashboard: '/assets/images/projects/delyo/delyo-dashboard.png',
     mobile: '/assets/images/projects/delyo/delyo-mobile.jpg',
     placeholder: 'https://placehold.co/800x500/4F46E5/FFFFFF?text=DelYo+Padel+Tracker'
   },
   financialManager: {
-    main: '/assets/images/projects/financial-manager/financial-manager.png',
-    dashboard: '/assets/images/projects/financial-manager/financial-manager.png',
+    main: '/assets/images/projects/financial-manager/financial-manager.webp',
+    dashboard: '/assets/images/projects/financial-manager/financial-manager.webp',
     mobile: '/assets/images/projects/financial-manager/financial-manager-mobile.jpg',
     placeholder: 'https://placehold.co/800x500/059669/FFFFFF?text=Financial+Manager'
   },
@@ -27,12 +27,12 @@ export const PROJECT_IMAGES = {
     placeholder: 'https://placehold.co/800x500/DC2626/FFFFFF?text=KompKit'
   },
   cryptotracker: {
-    main: '/assets/images/projects/cryptotracker/CT-banner.png',
+    main: '/assets/images/projects/cryptotracker/CT-banner.webp',
     placeholder: 'https://placehold.co/800x500/F59E0B/FFFFFF?text=CryptoTracker'
   },
   novaflow: {
-    main: '/assets/images/projects/novaflow/novaflow.png',
-    dashboard: '/assets/images/projects/novaflow/novaflow.png',
+    main: '/assets/images/projects/novaflow/novaflow.webp',
+    dashboard: '/assets/images/projects/novaflow/novaflow.webp',
     mobile: '/assets/images/projects/novaflow/novaflow-mobile.jpg',
     placeholder: 'https://placehold.co/800x500/8B5CF6/FFFFFF?text=NovaFlow'
   }
@@ -48,6 +48,25 @@ export const LOGO_IMAGES = {
   personal: '/assets/images/logos/ivan-logo.svg',
   companies: {}
 } as const;
+
+/**
+ * Intrinsic size of each project's `main` image. Used to set width/height on
+ * the <img> so the browser reserves the right space and the layout doesn't
+ * jump while the image loads.
+ */
+export const PROJECT_IMAGE_SIZES = {
+  binter: { width: 512, height: 512 },
+  canaryfly: { width: 512, height: 512 },
+  delyo: { width: 1400, height: 933 },
+  kompkit: { width: 1024, height: 1024 },
+  financialManager: { width: 1400, height: 729 },
+  cryptotracker: { width: 1400, height: 933 },
+  novaflow: { width: 1400, height: 694 }
+} as const;
+
+export function getProjectImageSize(project: keyof typeof PROJECT_IMAGE_SIZES) {
+  return PROJECT_IMAGE_SIZES[project];
+}
 
 export function getProjectImage(project: keyof typeof PROJECT_IMAGES, variant: 'main' | 'placeholder' = 'main') {
   const projectImages = PROJECT_IMAGES[project];

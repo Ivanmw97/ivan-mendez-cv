@@ -1,4 +1,7 @@
 ---
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
 export interface Props {
   label: string;
   title: string;
@@ -6,13 +9,9 @@ export interface Props {
   techStack: string[];
   ctaText?: string;
   ctaLink?: string;
-  imageUrl: string;
+  imageUrl: ImageMetadata;
   imageAlt: string;
-  imageWidth?: number;
-  imageHeight?: number;
   reversed?: boolean;
-  isCollage?: boolean;
-  collageImages?: string[];
   playStoreLink?: string;
   appStoreLink?: string;
   imageBackground?: string;
@@ -27,11 +26,7 @@ const {
   ctaLink,
   imageUrl,
   imageAlt,
-  imageWidth,
-  imageHeight,
   reversed = false,
-  isCollage = false,
-  collageImages = [],
   playStoreLink,
   appStoreLink,
   imageBackground,
@@ -93,31 +88,18 @@ const {
         </div>
       </div>
       <div class="project-showcase__image">
-        {
-          isCollage && collageImages.length > 0 ? (
-            <div class="project-showcase__collage">
-              {collageImages.map((image, index) => (
-                <img
-                  src={image}
-                  alt={`${imageAlt} - Screenshot ${index + 1}`}
-                  class="project-showcase__collage-img"
-                  loading="lazy"
-                />
-              ))}
-            </div>
-          ) : (
-            <img
-              src={imageUrl}
-              alt={imageAlt}
-              class="project-showcase__img"
-              style={imageBackground ? `background-color: ${imageBackground};` : undefined}
-              width={imageWidth}
-              height={imageHeight}
-              loading="lazy"
-              decoding="async"
-            />
-          )
-        }
+        <Image
+          src={imageUrl}
+          alt={imageAlt}
+          class="project-showcase__img"
+          style={imageBackground
+            ? `background-color: ${imageBackground};`
+            : undefined}
+          widths={[400, 800, 1200]}
+          sizes="(max-width: 1023px) 92vw, 45vw"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
     </div>
   </div>
@@ -320,36 +302,8 @@ const {
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
   }
 
-  .project-showcase__collage {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    width: 100%;
-    max-height: 500px;
-  }
 
-  .project-showcase__collage-img {
-    width: 100%;
-    height: auto;
-    max-height: 240px;
-    object-fit: contain;
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-    transition:
-      box-shadow 0.3s ease,
-      transform 0.3s ease;
-    background-color: #ffffff;
-  }
-  :global([data-theme="dark"]) .project-showcase__collage-img {
-    background-color: #ffffff;
-    border: 1px solid #2a2a2a;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-  }
 
-  .project-showcase:hover .project-showcase__collage-img {
-    box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.25);
-    transform: translateY(-2px);
-  }
 
   /* Project animations */
   @keyframes project-fade-up {

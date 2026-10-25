@@ -3,7 +3,8 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ProjectShowcase from "../components/ProjectShowcase.astro";
-import { getProjectImage, getProjectImageSize } from "../constants/images";
+import { getProjectImage } from "../constants/images";
+import type { ImageMetadata } from "astro";
 
 interface ProjectEntry {
   label: string;
@@ -14,8 +15,7 @@ interface ProjectEntry {
   ctaLink?: string;
   playStoreLink?: string;
   appStoreLink?: string;
-  imageUrl: string;
-  imageKey: Parameters<typeof getProjectImageSize>[0];
+  imageUrl: ImageMetadata;
   imageAlt: string;
   imageBackground?: string;
 }
@@ -31,7 +31,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       playStoreLink: "https://play.google.com/store/apps/details?id=com.bintercanarias.binterApp&hl=es",
       appStoreLink: "https://apps.apple.com/es/app/binter/id929074339",
       imageUrl: getProjectImage("binter"),
-      imageKey: "binter",
       imageBackground: "#008900",
       imageAlt: "Binter Mobile App",
     },
@@ -44,7 +43,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       playStoreLink: "https://play.google.com/store/apps/details?id=es.canaryfly.canaryflyapp&hl=es",
       appStoreLink: "https://apps.apple.com/es/app/canaryfly/id1240747230",
       imageUrl: getProjectImage("canaryfly"),
-      imageKey: "canaryfly",
       imageBackground: "#002DA7",
       imageAlt: "CanaryFly Mobile App",
     },
@@ -56,7 +54,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       techStack: ["Flutter", "Dart", "Hive", "Provider"],
       playStoreLink: "https://play.google.com/store/apps/details?id=com.delyo.delyo&hl=es_419",
       imageUrl: getProjectImage("delyo"),
-      imageKey: "delyo",
       imageAlt: "DelYo Padel Match Tracker Mobile App",
     },
     {
@@ -68,7 +65,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "View Project",
       ctaLink: "https://github.com/Kompkit/KompKit",
       imageUrl: getProjectImage("kompkit"),
-      imageKey: "kompkit",
       imageAlt: "KompKit Cross-Platform Utility Toolkit",
     },
     {
@@ -80,7 +76,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "View Live Demo",
       ctaLink: "https://ivanmw97.github.io/financial-manager",
       imageUrl: getProjectImage("financialManager"),
-      imageKey: "financialManager",
       imageAlt: "Financial Manager Web Application Dashboard",
     },
     {
@@ -92,7 +87,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "View Project",
       ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
       imageUrl: getProjectImage("cryptotracker"),
-      imageKey: "cryptotracker",
       imageAlt: "CryptoTracker Mobile Application Banner",
     },
     {
@@ -104,7 +98,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "View Live Demo",
       ctaLink: "https://modulum-studio.github.io/nova-flow/",
       imageUrl: getProjectImage("novaflow"),
-      imageKey: "novaflow",
       imageAlt: "NovaFlow AI Task Management Landing Page",
     },
   ],
@@ -118,7 +111,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       playStoreLink: "https://play.google.com/store/apps/details?id=com.bintercanarias.binterApp&hl=es",
       appStoreLink: "https://apps.apple.com/es/app/binter/id929074339",
       imageUrl: getProjectImage("binter"),
-      imageKey: "binter",
       imageBackground: "#008900",
       imageAlt: "App Móvil de Binter",
     },
@@ -131,7 +123,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       playStoreLink: "https://play.google.com/store/apps/details?id=es.canaryfly.canaryflyapp&hl=es",
       appStoreLink: "https://apps.apple.com/es/app/canaryfly/id1240747230",
       imageUrl: getProjectImage("canaryfly"),
-      imageKey: "canaryfly",
       imageBackground: "#002DA7",
       imageAlt: "App Móvil de CanaryFly",
     },
@@ -143,7 +134,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       techStack: ["Flutter", "Dart", "Hive", "Provider"],
       playStoreLink: "https://play.google.com/store/apps/details?id=com.delyo.delyo&hl=es_419",
       imageUrl: getProjectImage("delyo"),
-      imageKey: "delyo",
       imageAlt: "DelYo App Móvil de Seguimiento de Pádel",
     },
     {
@@ -155,7 +145,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "Ver Proyecto",
       ctaLink: "https://github.com/Kompkit/KompKit",
       imageUrl: getProjectImage("kompkit"),
-      imageKey: "kompkit",
       imageAlt: "KompKit Kit de Utilidades Multiplataforma",
     },
     {
@@ -167,7 +156,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "Ver Demo",
       ctaLink: "https://ivanmw97.github.io/financial-manager",
       imageUrl: getProjectImage("financialManager"),
-      imageKey: "financialManager",
       imageAlt: "Dashboard de Financial Manager",
     },
     {
@@ -179,7 +167,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "Ver Proyecto",
       ctaLink: "https://github.com/Ivanmw97/CryptoTracker",
       imageUrl: getProjectImage("cryptotracker"),
-      imageKey: "cryptotracker",
       imageAlt: "Banner de CryptoTracker Aplicación Móvil",
     },
     {
@@ -191,7 +178,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
       ctaText: "Ver Demo",
       ctaLink: "https://modulum-studio.github.io/nova-flow/",
       imageUrl: getProjectImage("novaflow"),
-      imageKey: "novaflow",
       imageAlt: "NovaFlow Landing Page de Gestión de Tareas con IA",
     },
   ],
@@ -229,8 +215,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
               playStoreLink={project.playStoreLink}
               appStoreLink={project.appStoreLink}
               imageUrl={project.imageUrl}
-              imageWidth={getProjectImageSize(project.imageKey).width}
-              imageHeight={getProjectImageSize(project.imageKey).height}
               imageBackground={project.imageBackground}
               imageAlt={project.imageAlt}
               reversed={index % 2 === 1}
@@ -251,8 +235,6 @@ const projectsData: { en: ProjectEntry[]; es: ProjectEntry[] } = {
               playStoreLink={project.playStoreLink}
               appStoreLink={project.appStoreLink}
               imageUrl={project.imageUrl}
-              imageWidth={getProjectImageSize(project.imageKey).width}
-              imageHeight={getProjectImageSize(project.imageKey).height}
               imageBackground={project.imageBackground}
               imageAlt={project.imageAlt}
               reversed={index % 2 === 1}

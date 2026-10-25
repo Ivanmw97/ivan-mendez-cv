@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import CVHeader from "../components/CVHeader.astro";
 import Skills from "../components/Skills.astro";
+import Languages from "../components/Languages.astro";
 import Experience from "../components/Experience.astro";
 import Projects from "../components/Projects.astro";
 import { translations } from "../i18n/translations";
@@ -28,6 +29,12 @@ const es = translations.es;
       <Skills skills={en.skills} sectionTitle={en.sectionTitles.skills} />
     </div>
     <div class="cv-section-animated">
+      <Languages
+        languages={en.languages}
+        sectionTitle={en.sectionTitles.languages}
+      />
+    </div>
+    <div class="cv-section-animated">
       <Projects
         projects={en.projects}
         sectionTitle={en.sectionTitles.projects}
@@ -46,6 +53,12 @@ const es = translations.es;
     </div>
     <div class="cv-section-animated">
       <Skills skills={es.skills} sectionTitle={es.sectionTitles.skills} />
+    </div>
+    <div class="cv-section-animated">
+      <Languages
+        languages={es.languages}
+        sectionTitle={es.sectionTitles.languages}
+      />
     </div>
     <div class="cv-section-animated">
       <Projects

@@ -34,6 +34,7 @@ export default {
     experience: "Work Experience",
     skills: "Skills",
     projects: "Projects",
+    languages: "Languages",
     downloadCV: "Download CV"
   },
   skills: [
@@ -58,6 +59,12 @@ export default {
       items: ["Git", "Docker", "Jenkins", "CI/CD", "Agile/Scrum", "Android Studio", "Visual Studio Code", "IntelliJ IDEA"]
     }
   ],
+  languages: [
+    { name: "Spanish", level: "Native" },
+    { name: "Swedish", level: "Native" },
+    { name: "English", level: "Professional" },
+    { name: "German", level: "Basic" }
+  ],
   experiences: [
     {
       company: "Atlantis Technology (Binter)",
@@ -69,7 +76,19 @@ export default {
         "Handle requirements analysis, technical documentation, and direct client communication, beyond just coding",
         "Have the freedom to define the architecture of new projects from scratch, applying scalable and maintainable patterns",
         "Collaborate with cross-functional teams, combining mobile development with web integrations and tooling in JS/TS",
-        "Contribute to technical decision-making alongside stakeholders, aligning solutions with business needs"
+        "Contribute to technical decision-making alongside stakeholders, aligning solutions with business needs",
+        "Working on an ongoing urban-mobility project (confidential client) involving Google Maps Platform and Firebase integration"
+      ]
+    },
+    {
+      company: "Modulum Studio",
+      position: "Independent Developer & Founder",
+      period: "Apr. 2025 - Mar. 2026",
+      location: "Las Palmas de Gran Canaria, Spain",
+      achievements: [
+        "Built and published DelYo, a cross-platform Flutter app on Google Play with 6 languages and an offline-first architecture (Hive, Provider)",
+        "Created and maintain KompKit, a monorepo with identical APIs across TypeScript, Kotlin and Dart",
+        "Dedicated this period to continuous learning and personal product development"
       ]
     },
     {
@@ -100,6 +119,11 @@ export default {
     }
   ],
   projects: [
+    {
+      title: "Full-stack platform (in development)",
+      description: "Personal product built from scratch: Ktor (Kotlin) backend, Flutter mobile app and Vue web front-end, with PostgreSQL and Docker. I handle architecture, infrastructure and DevOps.",
+      technologies: ["Ktor", "Flutter", "Vue", "PostgreSQL", "Docker"]
+    },
     {
       title: "Binter",
       description: "Official app for Binter, the leading airline in the Canary Islands. Development and maintenance of Flutter features, from flight booking to ticket management, for thousands of active users.",
@@ -137,12 +161,6 @@ export default {
       description: "A mobile application developed in Kotlin for real-time cryptocurrency tracking. Features live price monitoring, detailed cryptocurrency information with interactive charts, search functionality, favorites management, and dynamic themes. Built with MVVM architecture, Jetpack Compose, and modern Android development practices.",
       technologies: ["Kotlin", "Jetpack Compose", "Ktor", "Room", "Koin", "MVVM", "Material Design 3"],
       link: "https://github.com/Ivanmw97/CryptoTracker"
-    },
-    {
-      title: "NovaFlow",
-      description: "AI-Powered Task Management platform designed by Modulum Studio. A sleek and modern concept showcasing design and development capabilities with cutting-edge technologies. Features clean minimalist design, seamless internationalization (English/Spanish), dark mode support, and responsive layouts that prioritize both aesthetics and functionality.",
-      technologies: ["Astro", "TypeScript", "TailwindCSS", "Internationalization", "Dark Mode"],
-      link: "https://modulum-studio.github.io/nova-flow/"
     }
   ]
 };

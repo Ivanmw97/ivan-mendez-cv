@@ -4,7 +4,6 @@ import cryptotracker from '../assets/images/projects/cryptotracker/CT-banner.web
 import delyo from '../assets/images/projects/delyo/delyo-banner-en.webp';
 import financialManager from '../assets/images/projects/financial-manager/financial-manager.webp';
 import kompkit from '../assets/images/projects/kompkit/kompkit.jpeg';
-import novaflow from '../assets/images/projects/novaflow/novaflow.webp';
 
 /**
  * Project images live in src/assets so Astro processes them at build time:
@@ -17,8 +16,7 @@ export const PROJECT_IMAGES = {
   cryptotracker,
   delyo,
   financialManager,
-  kompkit,
-  novaflow
+  kompkit
 } as const;
 
 export type ProjectImageKey = keyof typeof PROJECT_IMAGES;

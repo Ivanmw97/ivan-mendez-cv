@@ -1,0 +1,107 @@
+---
+interface Language {
+  name: string;
+  level: string;
+}
+
+interface Props {
+  languages: Language[];
+  sectionTitle?: string;
+}
+
+const { languages, sectionTitle = "Languages" } = Astro.props;
+---
+
+<section class="languages-section">
+  <div class="languages-container">
+    <h2 class="section-title">
+      {sectionTitle}
+    </h2>
+
+    <div class="languages-grid">
+      {
+        languages.map((language) => (
+          <div class="language-item">
+            <span class="language-name">{language.name}</span>
+            <span class="language-level">{language.level}</span>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .languages-section {
+    padding: 4rem 2rem;
+    border-bottom: 1px solid var(--color-gray-200);
+  }
+  :global([data-theme="dark"]) .languages-section {
+    border-bottom-color: #262626;
+  }
+
+  .languages-container {
+    max-width: var(--max-width-content);
+    margin: 0 auto;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-black);
+    margin-bottom: 2.5rem;
+  }
+  :global([data-theme="dark"]) .section-title {
+    color: #ffffff;
+  }
+
+  .languages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .language-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-gray-200);
+    border-radius: 0.75rem;
+  }
+  :global([data-theme="dark"]) .language-item {
+    border-color: #262626;
+  }
+
+  .language-name {
+    font-size: 1.0625rem;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-black);
+  }
+  :global([data-theme="dark"]) .language-name {
+    color: #ffffff;
+  }
+
+  .language-level {
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+  }
+  :global([data-theme="dark"]) .language-level {
+    color: #a3a3a3;
+  }
+
+  @media (max-width: 768px) {
+    .languages-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+    }
+
+    .languages-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+    }
+  }
+</style>

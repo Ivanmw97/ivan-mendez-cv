@@ -45,12 +45,41 @@
     });
   }
 
+  // CSS animations run off the document clock, which starts at navigation.
+  // On a slow load the whole intro can be spent before the first paint, so
+  // the hero is held at its first frame (--intro-state: paused) until we
+  // release it here: once the page has painted and is actually on screen.
   // The "IM" letters split apart at 0.66s and the name is wiped open
-  // between 0.74s and 1.32s (see .hero-mark / .hero-name in index.astro).
-  // Bring the header in once the name has landed.
-  if (reduceMotion) {
-    revealHeader();
+  // between 0.74s and 1.32s, so the header follows at 1.35s.
+  var introStarted = false;
+  function startIntro() {
+    if (introStarted) return;
+    introStarted = true;
+    document.documentElement.classList.add("intro-ready");
+    if (reduceMotion) {
+      revealHeader();
+    } else {
+      setTimeout(revealHeader, 1350);
+    }
+  }
+
+  function startWhenVisible() {
+    if (document.visibilityState === "hidden") {
+      // Don't burn the intro in a background tab; wait until it's looked at.
+      document.addEventListener("visibilitychange", startWhenVisible, {
+        once: true,
+      });
+      return;
+    }
+    // Two frames: the first schedules the paint, the second lands after it.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(startIntro);
+    });
+  }
+
+  if (document.readyState === "complete") {
+    startWhenVisible();
   } else {
-    setTimeout(revealHeader, 1350);
+    window.addEventListener("load", startWhenVisible, { once: true });
   }
 })();

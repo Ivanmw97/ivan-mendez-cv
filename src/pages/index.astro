@@ -171,6 +171,20 @@ import Footer from "../components/Footer.astro";
     background-color: #0a0a0a;
   }
 
+  /* The intro is held at its first frame until the page has painted and is
+     actually on screen — otherwise a slow load burns through it before the
+     visitor sees anything, since CSS animations run off the document clock.
+     With no JS the `js` class is never set and everything just plays. */
+  .hero {
+    --intro-state: running;
+  }
+  :global(html.js) .hero {
+    --intro-state: paused;
+  }
+  :global(html.intro-ready) .hero {
+    --intro-state: running;
+  }
+
   /* ── Hero ── */
   .hero {
     position: relative;
@@ -283,6 +297,7 @@ import Footer from "../components/Footer.astro";
     animation:
       hero-bounce 2.4s ease-in-out infinite,
       hero-fade-in 0.4s ease 1.75s forwards;
+    animation-play-state: var(--intro-state, running);
     transition:
       border-color var(--transition-fast),
       color var(--transition-fast),
@@ -548,6 +563,7 @@ import Footer from "../components/Footer.astro";
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.04);
     animation: hero-mark-punch 0.42s forwards;
+    animation-play-state: var(--intro-state, running);
   }
   :global([data-theme="dark"]) .hero-mark {
     color: #ffffff;
@@ -562,10 +578,12 @@ import Footer from "../components/Footer.astro";
   .hero-mark__i {
     animation: hero-mark-split-left 0.44s cubic-bezier(0.55, 0, 0.3, 1) 0.66s
       forwards;
+    animation-play-state: var(--intro-state, running);
   }
   .hero-mark__m {
     animation: hero-mark-split-right 0.44s cubic-bezier(0.55, 0, 0.3, 1) 0.66s
       forwards;
+    animation-play-state: var(--intro-state, running);
   }
 
   @keyframes hero-mark-punch {
@@ -624,6 +642,7 @@ import Footer from "../components/Footer.astro";
     transform: scale(0.92);
     animation: hero-name-reveal 0.58s cubic-bezier(0.16, 1, 0.3, 1) 0.74s
       forwards;
+    animation-play-state: var(--intro-state, running);
   }
 
   @keyframes hero-name-reveal {
@@ -650,6 +669,7 @@ import Footer from "../components/Footer.astro";
     transform: translateY(14px);
     animation: hero-text-in 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     animation-delay: var(--reveal-delay, 0s);
+    animation-play-state: var(--intro-state, running);
   }
 
   @keyframes hero-text-in {

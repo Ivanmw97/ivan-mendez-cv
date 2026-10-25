@@ -88,6 +88,15 @@ const canonicalUrl = new URL(Astro.url.pathname, "https://ivanmendez.dev").href;
         // Set initial language
         const savedLang = localStorage.getItem("lang") || "en";
         document.documentElement.setAttribute("data-lang", savedLang);
+
+        // Mark that JS is available, so intro animations can be held paused
+        // until the page has actually painted (see /js/hero.js). Without JS
+        // nothing is held back and the page renders as-is.
+        document.documentElement.classList.add("js");
+        // Safety net: never leave the intro parked if hero.js fails to load.
+        setTimeout(function () {
+          document.documentElement.classList.add("intro-ready");
+        }, 5000);
       })();
 
       // Translation data
